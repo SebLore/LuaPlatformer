@@ -1,0 +1,31 @@
+[global]
+; where to search for include_root_regex matches (relative to script dir unless absolute)
+search_base=..
+
+; one or more include roots resolved by regex and/or explicit paths
+include_root_regex=raylib_test/raylib_test/src/include/ECS$
+; include_root_rel=../some/other/include
+
+; define logging and exclude files
+log_file=gen_includes.log
+excludes_file=excludes.txt
+
+; parse flags
+case_sensitive_keywords=false
+auto_create_aggregators=false
+
+; optional global defaults for bundle output
+default_output_ext=hpp
+default_output_name_template={folder}.{ext}   ; foldername.hpp by default
+default_output_subdir=.                       ; inside the include root
+default_scan_glob=**/*.h*
+
+[bundle:Components]
+folder=Components
+;scan_glob=**/*.h*
+
+[bundle:Systems]
+folder=Systems
+scan_glob=**/*System.h*
+; example override output_name_template={folder}_all.{ext}
+auto_create=true

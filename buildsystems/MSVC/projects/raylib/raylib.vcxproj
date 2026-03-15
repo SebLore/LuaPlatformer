@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{89243183-0ef4-43ca-a5de-2cec2c875ac6}</ProjectGuid>
+    <RootNamespace>raylib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="..\..\props\UserMacros.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="..\..\props\UserMacros.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(LibOutputDir)</OutDir>
+    <IntDir>$(IntOutputDir)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(LibOutputDir)</OutDir>
+    <IntDir>$(IntOutputDir)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);GRAPHICS_API_OPENGL_33;PLATFORM_DESKTOP</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(IncludeGLFW);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);GRAPHICS_API_OPENGL_33;PLATFORM_DESKTOP</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(IncludeGLFW);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\external\raygui\src\raygui.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\cgltf.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\glad.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\jar_mod.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\jar_xm.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\miniaudio.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\stb_image.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\stb_image_resize2.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\stb_image_write.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\stb_rect_pack.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\external\stb_truetype.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\raylib.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\raymath.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\rcamera.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\rgestures.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\rlgl.h" />
+    <ClInclude Include="..\..\..\..\external\raylib\src\utils.h" />
+    <ClInclude Include="..\..\external\raylib\src\config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\external\raylib\src\external\stb_vorbis.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\raudio.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\rcore.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\rglfw.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\rmodels.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\rshapes.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\rtext.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\rtextures.c" />
+    <ClCompile Include="..\..\..\..\external\raylib\src\utils.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\external\raylib\src\raylib.dll.rc" />
+    <ResourceCompile Include="..\..\..\..\external\raylib\src\raylib.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\external\raylib\src\raylib.dll.rc.data" />
+    <None Include="..\..\..\..\external\raylib\src\raylib.rc.data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\external\raylib\src\raylib.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

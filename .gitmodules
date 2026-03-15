@@ -1,0 +1,12 @@
+[submodule "external/entt"]
+	path = external/entt
+	url = https://github.com/skypjack/entt.git
+[submodule "external/raylib_git_template"]
+	path = external/raylib_git_template
+	url = https://github.com/raysan5/raylib-game-template
+[submodule "external/raygui"]
+	path = external/raygui
+	url = https://github.com/raysan5/raygui.git
+[submodule "external/lua"]
+	path = external/lua
+	url = https://github.com/lua/lua

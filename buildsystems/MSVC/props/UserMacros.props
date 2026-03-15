@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <ProjectRoot>$(SolutionDir)..\..\</ProjectRoot>
+    <ExternalDir>$(ProjectRoot)external\</ExternalDir>
+    <BuildDir>$(ProjectRoot)build\</BuildDir>
+    <BinOutputDir>$(ProjectRoot)build\bin\</BinOutputDir>
+    <LibOutputDir>$(BuildDir)\lib\$(Platform)\$(Configuration)\</LibOutputDir>
+    <IntOutputDir>$(BuildDir)\$(ProjectName)\$(Platform)\$(Configuration)\</IntOutputDir>
+    <IncludeLua>$(ExternalDir)lua;$(SolutionDir)projects\luaCompile;</IncludeLua>
+    <IncludeEntt>$(ExternalDir)entt\src</IncludeEntt>
+    <IncludeGLFW>$(ExternalDir)GLFW\include;$(ExternalDir)GLFW\src</IncludeGLFW>
+    <IncludeRaylib>$(ExternalDir)raylib\src;$(ExternaDirl)raylib\src\external</IncludeRaylib>
+    <IncludeRaygui>$(ExternalDir)raygui\src</IncludeRaygui>
+    <IncludeExternalDependencies>$(IncludeLua);$(IncludeEntt);$(IncludeGLFW);$(IncludeRayLib);$(IncludeRaygui);</IncludeExternalDependencies>
+    <ScriptDir>$(ProjectRoot)scripts</ScriptDir>
+    <AssetDir>$(ProjectRoot)assets</AssetDir>
+    <DebugLibs />
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="ProjectRoot">
+      <Value>$(ProjectRoot)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ExternalDir">
+      <Value>$(ExternalDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BuildDir">
+      <Value>$(BuildDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BinOutputDir">
+      <Value>$(BinOutputDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="LibOutputDir">
+      <Value>$(LibOutputDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IntOutputDir">
+      <Value>$(IntOutputDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IncludeLua">
+      <Value>$(IncludeLua)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IncludeEntt">
+      <Value>$(IncludeEntt)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IncludeGLFW">
+      <Value>$(IncludeGLFW)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IncludeRaylib">
+      <Value>$(IncludeRaylib)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IncludeRaygui">
+      <Value>$(IncludeRaygui)</Value>
+    </BuildMacro>
+    <BuildMacro Include="IncludeExternalDependencies">
+      <Value>$(IncludeExternalDependencies)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ScriptDir">
+      <Value>$(ScriptDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="AssetDir">
+      <Value>$(AssetDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="DebugLibs">
+      <Value>$(DebugLibs)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

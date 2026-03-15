@@ -1,0 +1,42 @@
+InputState
+
+Tracks:
+
+- Which KEYS are DOWN
+- Which KEYS were PRESSED
+- Which KEYS were RELEASED
+
+Same but for GAMEPAD
+
+- CURRENT MOUSE POS
+- LAST MOUSE POS
+- MOUSE DELTA
+
+If project was bigger I could probably make the inputs configurable but for now 
+I hardcoding them.
+
+To consider: should gamepad and key inputs be usable at the same time, for the same action?
+
+
+ACTIONS:
+
+Platforming:
+- MOVE_RIGHT
+- MOVE_LEFT
+- JUMP
+- USE
+
+Menu:
+- MENU_UP
+- MENU_DOWN
+- MENU_SELECT
+- MENU_BACK
+- MENU_OPEN
+
+Also allow for mouse input, obviously (if there's time).
+
+Debug:
+- DEBUG_TOGGLE
+- DEBUG_SHOW_GRID
+- DEBUG_SHOW_FPS
+- DEBUG_SHOW_COLLIDERS
