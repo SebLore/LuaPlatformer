@@ -11,24 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\include\AssetManager.cpp" />
-    <ClCompile Include="src\include\AssetRegistry.cpp" />
-    <ClCompile Include="src\LuaWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="tests\LuaWrapperTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\include\AssetCache.h" />
-    <ClInclude Include="src\include\AssetId.h" />
-    <ClInclude Include="src\include\AssetManager.h" />
-    <ClInclude Include="src\include\AssetRegistry.h" />
-    <ClInclude Include="src\include\Components.h" />
-    <ClInclude Include="src\include\IAssetCache.h" />
-    <ClInclude Include="src\include\LuaBindings.h" />
-    <ClInclude Include="src\include\LuaWrapper.h" />
-    <ClInclude Include="src\include\RaylibTraits.h" />
-    <ClInclude Include="src\include\utils.h" />
     <ClInclude Include="tests\LuaWrapperTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tests\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
@@ -66,13 +56,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(BinOutputDir)\</OutDir>
-    <IntDir>$(IntOutputDir)\</IntDir>
+    <OutDir>$(BinOutputDir)</OutDir>
+    <IntDir>$(IntOutputDir)</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(BinOutputDir)\</OutDir>
-    <IntDir>$(IntOutputDir)\</IntDir>
+    <OutDir>$(BinOutputDir)</OutDir>
+    <IntDir>$(IntOutputDir)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -82,13 +72,13 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(IncludeEntt);$(IncludeLua);$(IncludeRayLib);$(IncludeRaygui);$(ProjectDir)src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludeExternalDependencies);$(Projects);$(Projects)Utility;$(Projects)\LuaWrapper;$(GameEngine);$(ProjectDir)src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LibOutputDir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua.lib;raylib.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winmm.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(LuaLib);$(rlLibs);LuaWrapper.lib;GameEngine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -101,13 +91,13 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(IncludeEntt);$(IncludeLua);$(IncludeRayLib);$(IncludeRaygui);$(ProjectDir)src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludeExternalDependencies);$(Projects);$(Projects)Utility;$(Projects)\LuaWrapper;$(GameEngine);$(ProjectDir)src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LibOutputDir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua.lib;raylib.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winmm.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(LuaLib);$(rlLibs);LuaWrapper.lib;GameEngine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

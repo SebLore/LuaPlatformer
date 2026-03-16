@@ -20,12 +20,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{50E7
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "projects\Application\Application.vcxproj", "{F4325F8C-4757-4D8A-83C3-3487357E8AB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{07CC695A-E566-47DD-9BD2-CBDDA105AAEE} = {07CC695A-E566-47DD-9BD2-CBDDA105AAEE}
+		{695CBAC2-8736-40F7-8475-0DEBACE9F203} = {695CBAC2-8736-40F7-8475-0DEBACE9F203}
+		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6} = {89243183-0EF4-43CA-A5DE-2CEC2C875AC6}
+		{B4203D97-F0CA-431B-AD3C-614B754939F1} = {B4203D97-F0CA-431B-AD3C-614B754939F1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "projects\GameEngine\GameEngine.vcxproj", "{695CBAC2-8736-40F7-8475-0DEBACE9F203}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaCompile", "projects\luaCompile\luaCompile.vcxproj", "{07CC695A-E566-47DD-9BD2-CBDDA105AAEE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raylib", "projects\raylib\raylib.vcxproj", "{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaWrapper", "projects\LuaWrapper\LuaWrapper.vcxproj", "{B4203D97-F0CA-431B-AD3C-614B754939F1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utility", "projects\Utility\Utility.vcxproj", "{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +59,14 @@ Global
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}.Debug|x64.Build.0 = Debug|x64
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}.Release|x64.ActiveCfg = Release|x64
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}.Release|x64.Build.0 = Release|x64
+		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Debug|x64.ActiveCfg = Debug|x64
+		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Debug|x64.Build.0 = Debug|x64
+		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Release|x64.ActiveCfg = Release|x64
+		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Release|x64.Build.0 = Release|x64
+		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Debug|x64.ActiveCfg = Debug|x64
+		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Debug|x64.Build.0 = Debug|x64
+		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Release|x64.ActiveCfg = Release|x64
+		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

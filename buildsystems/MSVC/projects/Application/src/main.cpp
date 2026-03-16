@@ -3,9 +3,10 @@
 #include <entt/entt.hpp>
 #include <raylib.h>
 
-#include "AssetManager.h"
+#include "Assets/AssetManager.h"
 #include "LuaBindings.h"
-#include "LuaWrapper.h"
+#include "LuaWrapper/LuaWrapper.h"
+#include "utility/fileutils.h"
 
 #ifdef USE_META // meta support for reflection
 #include <entt/core/hashed_string.hpp>
@@ -19,12 +20,9 @@
 // -- tiny helpers to call Lua functions safely --
 namespace
 {
-    namespace fs = std::filesystem;
-
     void register_meta()
     {
 #ifdef USE_META
-
         using namespace entt::literals;
 
         entt::meta_factory<Position>{}
@@ -52,18 +50,19 @@ struct Game
     static constexpr auto* SCRIPTS_DIR = "scripts";
 
     entt::registry       registry{};
-    LuaWrapper           lua{};
+    Lua::LuaWrapper      lua{};
     assets::AssetManager assets{};
 
     void Initialize()
     {
-        lua.SetScriptsPath(utils::FindDirectory(SCRIPTS_DIR).string());
+        lua.SetScriptsPath(util::FindDirectory(SCRIPTS_DIR).string());
 
         // setting up raylib
+        SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
         InitWindow(800, 600, "Raylib time!");
 
         // Bind a few functions
-        lua_register_functions(lua);
+        binding::lua_register_functions(lua);
 
         // Bind a couple of key constants (so Lua doesn’t need magic numbers)
         lua.SetGlobal("KEY_LEFT", KEY_LEFT);
@@ -71,7 +70,7 @@ struct Game
         lua.SetGlobal("KEY_UP", KEY_UP);
         lua.SetGlobal("KEY_DOWN", KEY_DOWN);
 
-        l_bind_ecs(lua, registry);
+        binding::l_bind_ecs(lua, registry);
     }
 
     void DrawPlayerTest(const PlayerTest& player) const
@@ -94,14 +93,14 @@ int main(void)
 
     // setting up lua
 
-    LuaWrapper& lua = game.lua;
+    Lua::LuaWrapper& lua = game.lua;
 
     register_meta();
 
     // Optional init (now it can exist)
     CallLuaVoid0(lua, "init");
 
-    if (!lua.RequireModule("ecs_test"))
+    if (!lua.RequireModule("circle"))
     {
         std::cerr << "Failed to get module circle: " << lua.Error() << "\n";
         CloseWindow();

@@ -6,11 +6,6 @@
 
 namespace components
 {
-    struct Position
-    {
-        Vector2 position{ 0, 0 };
-    };
-
     struct PositionI
     {
         int x = 0, y = 0;
@@ -21,9 +16,12 @@ namespace components
         Vector2 position{ 0, 0 };
     };
 
-    struct Velocity
+    struct Velocity : Vector2
     {
-        Vector2 v{ 0, 0 };
+    };
+
+    struct Position : Vector2
+    {
     };
 
     struct AABBCollider
@@ -38,6 +36,13 @@ namespace components
         bool  dynamic      = true;
         bool  grounded     = false;
         float gravityScale = 1.0f;
+    };
+
+    struct Circle
+    {
+        float x = 0;
+        float y = 0;
+        float r = 0;
     };
 
     struct PlayerController

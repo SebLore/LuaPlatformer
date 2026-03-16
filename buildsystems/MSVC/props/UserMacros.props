@@ -8,15 +8,18 @@
     <BinOutputDir>$(ProjectRoot)build\bin\</BinOutputDir>
     <LibOutputDir>$(BuildDir)\lib\$(Platform)\$(Configuration)\</LibOutputDir>
     <IntOutputDir>$(BuildDir)\$(ProjectName)\$(Platform)\$(Configuration)\</IntOutputDir>
-    <IncludeLua>$(ExternalDir)lua;$(SolutionDir)projects\luaCompile;</IncludeLua>
+    <IncludeLua>$(ExternalDir)lua;$(SolutionDir)projects\luaCompile</IncludeLua>
     <IncludeEntt>$(ExternalDir)entt\src</IncludeEntt>
     <IncludeGLFW>$(ExternalDir)GLFW\include;$(ExternalDir)GLFW\src</IncludeGLFW>
     <IncludeRaylib>$(ExternalDir)raylib\src;$(ExternaDirl)raylib\src\external</IncludeRaylib>
     <IncludeRaygui>$(ExternalDir)raygui\src</IncludeRaygui>
-    <IncludeExternalDependencies>$(IncludeLua);$(IncludeEntt);$(IncludeGLFW);$(IncludeRayLib);$(IncludeRaygui);</IncludeExternalDependencies>
+    <IncludeExternalDependencies>$(IncludeLua);$(IncludeEntt);$(IncludeGLFW);$(IncludeRayLib);$(IncludeRaygui)</IncludeExternalDependencies>
     <ScriptDir>$(ProjectRoot)scripts</ScriptDir>
     <AssetDir>$(ProjectRoot)assets</AssetDir>
-    <DebugLibs />
+    <Projects>$(SolutionDir)Projects\</Projects>
+    <GameEngine>$(Projects)GameEngine\src\include</GameEngine>
+    <LuaLib>lua.lib;</LuaLib>
+    <rlLibs>raylib.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winmm.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</rlLibs>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
@@ -63,8 +66,17 @@
     <BuildMacro Include="AssetDir">
       <Value>$(AssetDir)</Value>
     </BuildMacro>
-    <BuildMacro Include="DebugLibs">
-      <Value>$(DebugLibs)</Value>
+    <BuildMacro Include="Projects">
+      <Value>$(Projects)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GameEngine">
+      <Value>$(GameEngine)</Value>
+    </BuildMacro>
+    <BuildMacro Include="LuaLib">
+      <Value>$(LuaLib)</Value>
+    </BuildMacro>
+    <BuildMacro Include="rlLibs">
+      <Value>$(rlLibs)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

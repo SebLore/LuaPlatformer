@@ -10,6 +10,15 @@
     <ClInclude Include="src\include\Core\ECS.h" />
     <ClInclude Include="src\include\Core\Components.h" />
     <ClInclude Include="src\include\Core\Systems.h" />
+    <ClInclude Include="src\include\Assets\AssetCache.h" />
+    <ClInclude Include="src\include\Assets\AssetId.h" />
+    <ClInclude Include="src\include\Assets\AssetManager.h" />
+    <ClInclude Include="src\include\Assets\AssetRegistry.h" />
+    <ClInclude Include="src\include\Assets\IAssetCache.h" />
+    <ClInclude Include="src\include\Assets\RaylibTraits.h" />
+    <ClInclude Include="src\include\Assets\AssetTags.h" />
+    <ClInclude Include="src\include\Assets\AssetTraits.h" />
+    <ClInclude Include="src\include\LuaBindings.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -51,5 +60,9 @@
     <Filter Include="include\Engine\Events">
       <UniqueIdentifier>{340241a7-0b7d-4aed-a06c-95ca94463b20}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\include\Assets\AssetManager.cpp" />
+    <ClCompile Include="src\include\Assets\AssetRegistry.cpp" />
   </ItemGroup>
 </Project>

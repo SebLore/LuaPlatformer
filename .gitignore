@@ -45,7 +45,7 @@
 *.pyc
 
 # Visual Studio
-.vs/*
+.vs/
 
 
 

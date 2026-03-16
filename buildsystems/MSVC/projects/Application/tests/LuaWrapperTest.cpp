@@ -1,12 +1,13 @@
 #include "LuaWrapperTest.h"
 
+// STL
 #include <cassert>
 #include <fstream>
 #include <initializer_list>
 #include <iostream>
 #include <string>
 
-#include "LuaWrapper.h"
+#include "LuaWrapper/LuaWrapper.h"
 
 namespace tests
 {
@@ -15,22 +16,22 @@ namespace tests
 #define TEST_CASE(name)                                                        \
     do                                                                         \
     {                                                                          \
-        ++g_testsRun;                                                          \
+        ++g_TestsRun;                                                          \
         std::cout << "[TEST] " << (name) << "\n";                              \
     } while (0)
 
     // ---------------------- Tiny test helpers ----------------------
     namespace
     {
-        int g_testsRun = 0;
+        int g_TestsRun = 0;
 
         void
-        assert_contains(const std::string& haystack, const std::string& needle)
+        assert_Container(const std::string& haystack, const std::string& needle)
         {
             assert(haystack.find(needle) != std::string::npos);
         }
 
-        void assert_contains_any(
+        void asset_ContainsAny(
             const std::string&                 haystack,
             std::initializer_list<const char*> needles)
         {
@@ -55,12 +56,12 @@ namespace tests
             }
             catch (const std::exception& e)
             {
-                assert_contains(e.what(), contains);
+                assert_Container(e.what(), contains);
             }
         }
 
         // ---------------------- C function for registerFunction test ----------------------
-        int cpp_add(lua_State* L)
+        int CppAdd(lua_State* L)
         {
             int a = static_cast<int>(luaL_checkinteger(L, 1));
             int b = static_cast<int>(luaL_checkinteger(L, 2));
@@ -92,12 +93,12 @@ namespace tests
 
         // Your implementation currently uses luaL_loadbuffer, so expect that,
         // but keep tolerant in case you switch again later.
-        assert_contains_any(
+        asset_ContainsAny(
             lua.Error(),
             { "luaL_loadbuffer", "luaL_loadbufferx", "luaL_dostring" });
 
         // Also validate it’s actually a Lua parse error (stable across implementations)
-        assert_contains(lua.Error(), "syntax error");
+        assert_Container(lua.Error(), "syntax error");
     }
 
     void test_doFile_success_and_gets()
@@ -136,7 +137,7 @@ namespace tests
 
         // If your doFile still uses luaL_dofile internally, this will match.
         // If you later refactor doFile similarly (loadfile+pcall), you can make this tolerant too.
-        assert_contains_any(
+        asset_ContainsAny(
             lua.Error(),
             { "luaL_dofile", "luaL_loadfile", "luaL_loadfilex" });
     }
@@ -191,7 +192,7 @@ namespace tests
     {
         TEST_CASE("registerFunction exposes C function and Lua can call it");
         LuaWrapper lua;
-        lua.RegisterFunction("cpp_add", cpp_add);
+        lua.RegisterFunction("cpp_add", CppAdd);
 
         bool ok = lua.DoString("sum = cpp_add(9, 33)");
         assert(ok);
@@ -253,5 +254,5 @@ namespace tests
         std::cout << "\nAll tests passed! (" << tests_run() << " tests)\n";
     }
 
-    int tests_run() { return g_testsRun; }
+    int tests_run() { return g_TestsRun; }
 } // namespace tests
