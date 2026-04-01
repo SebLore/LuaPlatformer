@@ -26,6 +26,15 @@
     <ClInclude Include="tests\LuaWrapperTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\parked.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Components.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="tests\README.md" />

@@ -15,6 +15,9 @@
     <ClCompile Include="tests\LuaWrapperTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\include\Components.h" />
+    <ClInclude Include="src\include\Game.h" />
+    <ClInclude Include="src\include\parked.h" />
     <ClInclude Include="tests\LuaWrapperTest.h" />
   </ItemGroup>
   <ItemGroup>

@@ -13,11 +13,11 @@ namespace tests
 {
     using namespace Lua;
 
-#define TEST_CASE(name)                                                        \
-    do                                                                         \
-    {                                                                          \
-        ++g_TestsRun;                                                          \
-        std::cout << "[TEST] " << (name) << "\n";                              \
+#define TEST_CASE(name)                                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        ++g_TestsRun;                                                                                                  \
+        std::cout << "[TEST] " << (name) << "\n";                                                                      \
     } while (0)
 
     // ---------------------- Tiny test helpers ----------------------
@@ -25,15 +25,12 @@ namespace tests
     {
         int g_TestsRun = 0;
 
-        void
-        assert_Container(const std::string& haystack, const std::string& needle)
+        void assert_Container(const std::string& haystack, const std::string& needle)
         {
             assert(haystack.find(needle) != std::string::npos);
         }
 
-        void asset_ContainsAny(
-            const std::string&                 haystack,
-            std::initializer_list<const char*> needles)
+        void asset_ContainsAny(const std::string& haystack, std::initializer_list<const char*> needles)
         {
             for (const char* n : needles)
                 if (haystack.find(n) != std::string::npos)
@@ -46,8 +43,7 @@ namespace tests
             assert(!R"(Haystack did not contain any expected substrings)");
         }
 
-        template <class Fn>
-        void expect_throw_contains(Fn&& fn, const std::string& contains)
+        template <class Fn> void expect_throw_contains(Fn&& fn, const std::string& contains)
         {
             try
             {
@@ -93,9 +89,7 @@ namespace tests
 
         // Your implementation currently uses luaL_loadbuffer, so expect that,
         // but keep tolerant in case you switch again later.
-        asset_ContainsAny(
-            lua.Error(),
-            { "luaL_loadbuffer", "luaL_loadbufferx", "luaL_dostring" });
+        asset_ContainsAny(lua.Error(), { "luaL_loadbuffer", "luaL_loadbufferx", "luaL_dostring" });
 
         // Also validate it’s actually a Lua parse error (stable across implementations)
         assert_Container(lua.Error(), "syntax error");
@@ -137,9 +131,7 @@ namespace tests
 
         // If your doFile still uses luaL_dofile internally, this will match.
         // If you later refactor doFile similarly (loadfile+pcall), you can make this tolerant too.
-        asset_ContainsAny(
-            lua.Error(),
-            { "luaL_dofile", "luaL_loadfile", "luaL_loadfilex" });
+        asset_ContainsAny(lua.Error(), { "luaL_dofile", "luaL_loadfile", "luaL_loadfilex" });
     }
 
     void test_setGlobals_then_read_from_lua()
@@ -168,24 +160,16 @@ namespace tests
         LuaWrapper lua;
 
         lua.DoString("val = 'not an int'");
-        expect_throw_contains(
-            [&] { (void)lua.GetGlobalInt("val"); },
-            "not an integer");
+        expect_throw_contains([&] { (void)lua.GetGlobalInt("val"); }, "not an integer");
 
         lua.DoString("val2 = 123");
-        expect_throw_contains(
-            [&] { (void)lua.GetGlobalString("val2"); },
-            "not a string");
+        expect_throw_contains([&] { (void)lua.GetGlobalString("val2"); }, "not a string");
 
         lua.DoString("val3 = {}");
-        expect_throw_contains(
-            [&] { (void)lua.GetGlobalNumber("val3"); },
-            "not a number");
+        expect_throw_contains([&] { (void)lua.GetGlobalNumber("val3"); }, "not a number");
 
         lua.DoString("val4 = 1"); // number, not boolean
-        expect_throw_contains(
-            [&] { (void)lua.GetGlobalBool("val4"); },
-            "not a boolean");
+        expect_throw_contains([&] { (void)lua.GetGlobalBool("val4"); }, "not a boolean");
     }
 
     void test_registerFunction_and_call_from_lua()
@@ -212,9 +196,7 @@ namespace tests
     {
         TEST_CASE("callIntInt throws if function does not exist");
         LuaWrapper lua;
-        expect_throw_contains(
-            [&] { (void)lua.CallIntInt("nope", 1); },
-            "not a function");
+        expect_throw_contains([&] { (void)lua.CallIntInt("nope", 1); }, "not a function");
     }
 
     void test_callIntInt_wrong_return_type()
@@ -222,9 +204,7 @@ namespace tests
         TEST_CASE("callIntInt throws if Lua returns wrong type");
         LuaWrapper lua;
         lua.DoString("function badret(x) return 'hello' end");
-        expect_throw_contains(
-            [&] { (void)lua.CallIntInt("badret", 1); },
-            "did not return an integer");
+        expect_throw_contains([&] { (void)lua.CallIntInt("badret", 1); }, "did not return an integer");
     }
 
     void test_callIntInt_lua_runtime_error()
@@ -232,9 +212,7 @@ namespace tests
         TEST_CASE("callIntInt throws if Lua errors during execution");
         LuaWrapper lua;
         lua.DoString("function boom(x) error('kaboom') end");
-        expect_throw_contains(
-            [&] { (void)lua.CallIntInt("boom", 1); },
-            "Lua function call failed");
+        expect_throw_contains([&] { (void)lua.CallIntInt("boom", 1); }, "Lua function call failed");
     }
 
     void test_runAllLuaWrapperTests()

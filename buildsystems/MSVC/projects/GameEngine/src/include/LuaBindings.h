@@ -14,8 +14,7 @@ namespace binding
     {
         entt::entity lNumberToEntity(lua_State* L, int index)
         {
-            return static_cast<entt::entity>(
-                static_cast<entt::id_type>(luaL_checkinteger(L, index)));
+            return static_cast<entt::entity>(static_cast<entt::id_type>(luaL_checkinteger(L, index)));
         }
     } // namespace
 
@@ -39,11 +38,7 @@ namespace binding
         int b = (int)luaL_checkinteger(L, 3);
         int a = (int)luaL_optinteger(L, 4, 255);
 
-        ClearBackground(
-            Color{ (unsigned char)r,
-                   (unsigned char)g,
-                   (unsigned char)b,
-                   (unsigned char)a });
+        ClearBackground(Color{ (unsigned char)r, (unsigned char)g, (unsigned char)b, (unsigned char)a });
         return 0;
     }
 
@@ -69,8 +64,7 @@ namespace binding
 
     static entt::registry* get_registry(lua_State* L)
     {
-        return static_cast<entt::registry*>(
-            lua_touserdata(L, lua_upvalueindex(1)));
+        return static_cast<entt::registry*>(lua_touserdata(L, lua_upvalueindex(1)));
     }
 
     static int l_ecs_create(lua_State* L)
@@ -188,7 +182,7 @@ namespace binding
         return luaL_error(L, "Unknown component type: %s", cname);
     }
 
-    static void l_bind_ecs(LuaWrapper& lua, entt::registry& registry)
+    static void lua_bind_ecs(LuaWrapper& lua, entt::registry& registry)
     {
         lua_State* L = lua.State();
         lua_newtable(L); // ecs

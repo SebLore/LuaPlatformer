@@ -58,7 +58,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(IncludeGLFW);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludeGLFW);$(IncludeRaylib);$(IncludeRaygui);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);GRAPHICS_API_OPENGL_33;PLATFORM_DESKTOP</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(IncludeGLFW);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludeGLFW);$(IncludeRaylib);$(IncludeRaygui);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -106,7 +106,6 @@
     <ClInclude Include="..\..\..\..\external\raylib\src\rgestures.h" />
     <ClInclude Include="..\..\..\..\external\raylib\src\rlgl.h" />
     <ClInclude Include="..\..\..\..\external\raylib\src\utils.h" />
-    <ClInclude Include="..\..\external\raylib\src\config.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\external\raylib\src\external\stb_vorbis.c" />
@@ -118,6 +117,7 @@
     <ClCompile Include="..\..\..\..\external\raylib\src\rtext.c" />
     <ClCompile Include="..\..\..\..\external\raylib\src\rtextures.c" />
     <ClCompile Include="..\..\..\..\external\raylib\src\utils.c" />
+    <ClCompile Include="raygui_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\..\external\raylib\src\raylib.dll.rc" />

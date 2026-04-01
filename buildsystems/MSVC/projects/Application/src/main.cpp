@@ -1,157 +1,181 @@
-
-
-#include <entt/entt.hpp>
-#include <raylib.h>
-
-#include "Assets/AssetManager.h"
-#include "LuaBindings.h"
-#include "LuaWrapper/LuaWrapper.h"
-#include "utility/fileutils.h"
-
-#ifdef USE_META // meta support for reflection
-#include <entt/core/hashed_string.hpp>
-#include <entt/meta/factory.hpp> // meta_factory
-#include <entt/meta/meta.hpp>
-#endif
-
+/**
+ * @file main.cpp
+ * @brief Main entry point for the application. Initializes the game, runs the main loop, and handles cleanup.
+ */
 #include <filesystem>
 #include <iostream>
+#include <string>
+#include <functional>
 
-// -- tiny helpers to call Lua functions safely --
-namespace
+#include "Game.h"
+
+#include "raygui.h"
+
+// prototyping a minimal editor gui with lambdas and raygui elements
+
+namespace gui
 {
-    void register_meta()
+    enum class ElementType : uint8_t
     {
-#ifdef USE_META
-        using namespace entt::literals;
+        Text,
+        Button,
+        Slider,
+        Checkbox,
+    };
 
-        entt::meta_factory<Position>{}
-            .type("Position"_hs)
-            .data<&Position::x>("x"_hs)
-            .data<&Position::y>("y"_hs);
-
-        entt::meta_factory<Circle>{}.type("Circle"_hs).data<&Circle::r>("r"_hs);
-#endif
-    }
-} // namespace
-
-struct PlayerTest
-{
-    TextureId texture;
-    Rectangle srcRect  = { 0, 0, 32, 32 };
-    Rectangle dstRect  = { 64, 64, 64, 64 };
-    Vector2   origin   = { 0, 0 };
-    float     rotation = 0;
-    Color     tint     = RAYWHITE;
-};
-
-struct Game
-{
-    static constexpr auto* SCRIPTS_DIR = "scripts";
-
-    entt::registry       registry{};
-    Lua::LuaWrapper      lua{};
-    assets::AssetManager assets{};
-
-    void Initialize()
+    struct GuiElement
     {
-        lua.SetScriptsPath(util::FindDirectory(SCRIPTS_DIR).string());
+        std::string           text = "GuiElement";
+        ElementType           type = ElementType::Text;
+        std::function<void()> action;
 
-        // setting up raylib
-        SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
-        InitWindow(800, 600, "Raylib time!");
+        // optional
+        Rectangle bounds{ 0, 0, 100, 50 }; // for buttons and sliders
+        float     sliderValue   = 0.0f;    // for sliders
+        float     size          = 20.0f;   // for text size
+        bool      checkboxValue = false;   // for checkboxes
+    };
 
-        // Bind a few functions
-        binding::lua_register_functions(lua);
-
-        // Bind a couple of key constants (so Lua doesn’t need magic numbers)
-        lua.SetGlobal("KEY_LEFT", KEY_LEFT);
-        lua.SetGlobal("KEY_RIGHT", KEY_RIGHT);
-        lua.SetGlobal("KEY_UP", KEY_UP);
-        lua.SetGlobal("KEY_DOWN", KEY_DOWN);
-
-        binding::l_bind_ecs(lua, registry);
-    }
-
-    void DrawPlayerTest(const PlayerTest& player) const
+    struct Gui
     {
-        if (const Texture2D* tex = assets.TryGetTexture(player.texture))
-            DrawTexturePro(
-                *tex,
-                player.srcRect,
-                player.dstRect,
-                player.origin,
-                player.rotation,
-                player.tint);
+        std::vector<GuiElement> elements;
+
+        void Draw()
+        {
+            for (auto& elem : elements)
+            {
+                switch (elem.type)
+                {
+                case ElementType::Text:
+                    DrawText(
+                        elem.text.c_str(), static_cast<int>(elem.bounds.x), static_cast<int>(elem.bounds.y),
+                        static_cast<int>(elem.size), BLACK);
+                    break;
+                case ElementType::Button:
+                    if (GuiButton(elem.bounds, elem.text.c_str()))
+                        elem.action();
+                    break;
+                case ElementType::Checkbox:
+                    if (GuiCheckBox(elem.bounds, elem.text.c_str(), &elem.checkboxValue))
+                        elem.action();
+                    break;
+                case ElementType::Slider:
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+    };
+
+    struct Editor
+    {
+        Gui  gui;
+        bool enabled = true;
+
+        void Draw()
+        {
+            if (!enabled)
+                return;
+
+            ClearBackground(RED);
+            BeginDrawing();
+            gui.Draw();
+            EndDrawing();
+        }
+
+        void Toggle() { enabled = !enabled; }
+    };
+
+    struct GuiConfig
+    {
+        std::vector<std::string> tabs;          // for future use, if we want multiple tabs of elements
+        int                      activeTab = 0; // index of the currently active tab
+
+        std::vector<GuiElement> elements; // definition of all GUI elements to be created in the editor
+    };
+
+    // for now we just hardcode the config, later should be managed through a lua file
+    static GuiConfig CreateGuiConfig()
+    {
+        GuiConfig config;
+        config.tabs = { "Main" };
+
+        const int   numElements = 5;
+        const float gap         = 0.0f;
+        const float width       = 60.0f;
+        const float height      = 20.0f;
+        float       offsetX     = 0.0f;
+        float       offsetY     = 0.0f;
+
+        for (int i = 0; i < numElements; ++i)
+        {
+            config.elements.push_back(
+                GuiElement{ .text   = "Click Me",
+                            .type   = ElementType::Button,
+                            .action = [i]() { std::cout << "Button" << std::to_string(i) << " clicked!\n"; },
+                            .bounds = Rectangle{ offsetX, offsetY, width, height } });
+            offsetX += width + gap;
+        }
+
+        config.elements.push_back(
+            GuiElement{ .text   = "Hello, World!",
+                        .type   = ElementType::Text,
+                        .bounds = Rectangle{ 10.0f, 50.0f, 0, 0 },
+                        .size   = 30.0f });
+
+        config.elements.push_back(
+            GuiElement{ .text   = "Toggle Editor",
+                        .type   = ElementType::Checkbox,
+                        .action = []() { std::cout << "Checkbox toggled!\n"; },
+                        .bounds = Rectangle{ 10.0f, 100.0f, 120.0f, 30.0f } });
+
+        return config;
     }
-};
+
+    static Gui CreateGui(const GuiConfig& config)
+    {
+        // In a real implementation, you'd want to set up the bounds and other parameters for each element properly
+        Gui gui;
+
+        gui.elements = config.elements;
+
+        return gui;
+    }
+} // namespace gui
 
 int main(void)
 {
-    Game game;
-    game.Initialize();
-
-    // setting up lua
-
-    Lua::LuaWrapper& lua = game.lua;
-
-    register_meta();
-
-    // Optional init (now it can exist)
-    CallLuaVoid0(lua, "init");
-
-    if (!lua.RequireModule("circle"))
+    try
     {
-        std::cerr << "Failed to get module circle: " << lua.Error() << "\n";
-        CloseWindow();
-        return EXIT_FAILURE;
-    }
+        game::Game  game;
+        gui::Editor editor;
 
-    // -- Initialize game --
-
-    {
-        auto& reg    = game.registry;
-        auto  e      = reg.create();
-        auto& player = reg.emplace_or_replace<PlayerTest>(e);
-
-        player.texture = game.assets.RegisterTexture("test_tiles.png");
-
-        if (!game.assets.LoadTextureFile(player.texture))
         {
-            std::cerr << "Failed to load player texture\n";
-            CloseWindow();
+            editor.gui = gui::CreateGui(gui::CreateGuiConfig());
+        }
+
+        if (!game.Initialize())
+        {
+            std::cerr << "Failed to initialize the game. Exiting...\n";
             return EXIT_FAILURE;
         }
-    }
 
-    while (!WindowShouldClose())
+        while (!WindowShouldClose())
+            editor.Draw();
+
+        //game.Run();
+
+        return EXIT_SUCCESS;
+    }
+    catch (const std::exception& e)
     {
-        float dt = GetFrameTime();
-
-        // Let Lua update state
-        if (!CallLuaVoid1Number(lua, "update", dt))
-            break;
-
-        BeginDrawing();
-
-        // Lua decides background and drawing
-        if (!CallLuaVoid0(lua, "draw"))
-        {
-            EndDrawing();
-            break;
-        }
-
-        {
-            auto view = game.registry.view<PlayerTest>();
-            for (auto entity : view)
-            {
-                const auto& player = view.get<PlayerTest>(entity);
-                game.DrawPlayerTest(player);
-            }
-        }
-
-        EndDrawing();
+        std::cerr << "Unhandled exception caught in main: " << e.what() << "\n";
+        return EXIT_FAILURE;
     }
-
-    CloseWindow();
+    catch (...)
+    {
+        std::cerr << "Unknown exception caught in main.\n";
+        return EXIT_FAILURE;
+    }
 }
