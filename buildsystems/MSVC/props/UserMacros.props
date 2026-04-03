@@ -10,7 +10,8 @@
     <IntOutputDir>$(BuildDir)\$(ProjectName)\$(Platform)\$(Configuration)\</IntOutputDir>
     <IncludeLua>$(ExternalDir)lua;$(SolutionDir)projects\luaCompile</IncludeLua>
     <IncludeEntt>$(ExternalDir)entt\src</IncludeEntt>
-    <IncludeGLFW>$(ExternalDir)GLFW\include;$(ExternalDir)GLFW\src</IncludeGLFW>
+    <GLFWDir>$(ExternalDir)raylib\src\external\glfw\</GLFWDir>
+    <IncludeGLFW>$(GLFWDir)include;$(GLFWDir)src</IncludeGLFW>
     <IncludeRaylib>$(ExternalDir)raylib\src;$(ExternaDirl)raylib\src\external</IncludeRaylib>
     <IncludeRaygui>$(ExternalDir)raygui\src</IncludeRaygui>
     <IncludeExternalDependencies>$(IncludeLua);$(IncludeEntt);$(IncludeGLFW);$(IncludeRayLib);$(IncludeRaygui)</IncludeExternalDependencies>
@@ -47,6 +48,9 @@
     </BuildMacro>
     <BuildMacro Include="IncludeEntt">
       <Value>$(IncludeEntt)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLFWDir">
+      <Value>$(GLFWDir)</Value>
     </BuildMacro>
     <BuildMacro Include="IncludeGLFW">
       <Value>$(IncludeGLFW)</Value>
