@@ -6,6 +6,7 @@
 
 namespace components
 {
+
     struct PlayerTest
     {
         TextureId texture;
@@ -25,4 +26,5 @@ namespace components
         int   width       = 800;             // total width of the level in pixels
         int   height      = 600;             // total height of the level in pixels
     };
+
 } // namespace components

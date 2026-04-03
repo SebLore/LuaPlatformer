@@ -5,11 +5,13 @@
 #include <entt/entt.hpp>
 
 #include "ECS/Components/BaseComponents.h"
+#include "Components.h"
 
 using namespace Lua;
 
 namespace binding
 {
+
     namespace
     {
         entt::entity lNumberToEntity(lua_State* L, int index)
