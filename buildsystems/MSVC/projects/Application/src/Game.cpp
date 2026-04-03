@@ -111,10 +111,11 @@ namespace game
 
     bool Game::SetupInitialGameState()
     {
-        m_TilesTexture = m_Assets.RegisterTexture("testtiles.png");
+        const char* texpath = "test_tiles.png";
+        m_TilesTexture = m_Assets.RegisterTexture(texpath);
         if (!m_Assets.LoadTextureFile(m_TilesTexture))
         {
-            std::cerr << "Failed to load tiles texture: testtiles.png\n";
+            std::cerr << "Failed to load tiles texture: " << texpath << "\n";
             return false;
         }
 
@@ -224,8 +225,7 @@ namespace game
             const auto& collider = view.get<components::BoxCollider>(entity);
             const auto& render   = view.get<components::DebugRenderRect>(entity);
 
-            DrawRectangle(
-                static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(collider.size.x),
+            DrawRectangle(static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(collider.size.x),
                 static_cast<int>(collider.size.y), render.color);
         }
     }
