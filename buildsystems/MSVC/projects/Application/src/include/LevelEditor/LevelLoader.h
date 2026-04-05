@@ -8,7 +8,7 @@
 
 namespace game
 {
-    inline bool LoadLevelFromLua(Lua::LuaWrapper& lua, const std::string& moduleName, LevelData& outLevel)
+    inline bool LoadLevelFromLua(Lua::LuaWrapper& lua, const std::string& moduleName, level::LevelData& outLevel)
     {
         lua_State* L = lua.State();
 

@@ -1,12 +1,11 @@
 #include "App.h"
 
 #include "LuaBindings.h"
+#include "Common/Components.h"
 
 bool App::Initialize()
 {
     LoadInitialScene();
-
-
 
     if (!m_Game.Initialize(ActiveScene()))
         return false;
@@ -15,9 +14,7 @@ bool App::Initialize()
     return true;
 }
 
-void App::Shutdown()
-{
-}
+void App::Shutdown() {}
 
 int App::Run()
 {
@@ -108,7 +105,7 @@ void App::Draw()
     // Draw scene
     Scene& scene = ActiveScene();
 
-    auto renderView = scene.GetRegistry().view<Renderable>();
+    auto renderView = scene.GetRegistry().view<components::Renderable>();
 
     EndDrawing();
 }

@@ -5,7 +5,7 @@
 #include <entt/entt.hpp>
 
 #include "ECS/Components/BaseComponents.h"
-#include "Components.h"
+//#include "Components.h"
 
 using namespace Lua;
 

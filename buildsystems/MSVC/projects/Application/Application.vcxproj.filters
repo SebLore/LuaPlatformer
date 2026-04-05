@@ -24,7 +24,7 @@
     <ClCompile Include="src\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
+    <ClCompile Include="src\include\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +65,7 @@
     <ClInclude Include="src\include\Scene\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\Systems\DrawSystem.h">
+    <ClInclude Include="src\include\Game\Systems\DrawSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\include\Common\RenderInfo.h">
@@ -74,7 +74,7 @@
     <ClInclude Include="src\include\Common\BaseComponents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\Systems\SystemBase.h">
+    <ClInclude Include="src\include\Game\Systems\SystemBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,9 +11,9 @@ namespace components
         TextureId texture;
         Rectangle src;
         Rectangle dst;
-        Vector2 origin = { 0, 0 };
-        float rotation = 0.0f;
-        Color tint = RAYWHITE;
+        Vector2   origin   = { 0, 0 };
+        float     rotation = 0.0f;
+        Color     tint     = RAYWHITE;
     };
 
     struct PlayerTest
@@ -29,6 +29,10 @@ namespace components
         float pixelRatio  = 1.0f;            // ratio of world units to pixels (for scaling)
         int   width       = 800;             // total width of the level in pixels
         int   height      = 600;             // total height of the level in pixels
+    };
+
+    struct Renderable
+    {
     };
 
 } // namespace components

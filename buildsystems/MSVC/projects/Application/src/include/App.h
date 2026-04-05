@@ -1,14 +1,13 @@
 #pragma once
 
-#include "Game.h"
-#include "Editor.h"
+#include "Game/Game.h"
+#include "Editor/Editor.h"
 
 static constexpr auto LUA_SCRIPTS_LOCATION = "scripts";
 
 class App
 {
-public:
-
+  public:
     /// @brief The main mode of the application, either running the game or the editor.
     enum class Mode : uint8_t
     {
@@ -35,15 +34,14 @@ public:
     bool InitializeLua();
     void LoadInitialScene();
 
-    Scene& ActiveScene()const { return *m_Scenes[m_SceneActiveIndex]; }
-
+    Scene& ActiveScene() const { return *m_Scenes[m_SceneActiveIndex]; }
 
     void Update();
     void Draw();
-    void SwitchMode(Mode newMode) { m_Mode = newMode;}
+    void SwitchMode(Mode newMode) { m_Mode = newMode; }
 
   private:
-    Mode m_Mode = Mode::Editor;
+    Mode  m_Mode  = Mode::Editor;
     State m_State = State::Initialize;
 
     game::Game     m_Game;
@@ -52,5 +50,5 @@ public:
     Lua::LuaWrapper m_Lua;
 
     std::vector<std::unique_ptr<Scene>> m_Scenes;
-    int m_SceneActiveIndex = 0;
+    int                                 m_SceneActiveIndex = 0;
 };

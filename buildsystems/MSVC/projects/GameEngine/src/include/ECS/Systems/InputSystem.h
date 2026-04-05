@@ -15,7 +15,7 @@
 class InputSystem : public ISystem
 {
   public:
-    void OnUpdate(entt::registry& r, float dt) override;
+    bool OnUpdate(entt::registry& r, float dt) override;
 
   private:
     static std::string ToKeyString(KeyboardKey k)
@@ -57,22 +57,23 @@ class InputSystem : public ISystem
 
 /// @brief Registers user input into a resource component, including keyboard, mouse and gamepad input.
 /// @param r entt registry
-inline void InputSystem::OnUpdate(entt::registry& r, float dt)
+inline bool InputSystem::OnUpdate(entt::registry& r, float dt)
 {
     using namespace components;
 
-    auto viewInput = r.view<TrackedKeys, KeyboardInput>();
+    auto viewInput  = r.view<TrackedKeys, KeyboardInput>();
     auto viewPlayer = r.view<Player, Position, PlayerController>();
 
     for (auto e : viewInput)
     {
-        TrackedKeys& tracked = r.get<TrackedKeys>(e);
-        KeyboardInput& input = r.get<KeyboardInput>(e);
+        TrackedKeys&   tracked = r.get<TrackedKeys>(e);
+        KeyboardInput& input   = r.get<KeyboardInput>(e);
 
         for (KeyboardKey key : tracked.keys)
         {
             // for now just update player position in x and y direction based on WASD
-
         }
     }
+
+    return false;
 }

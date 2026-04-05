@@ -19,6 +19,8 @@
     <ClInclude Include="src\include\Assets\AssetTags.h" />
     <ClInclude Include="src\include\Assets\AssetTraits.h" />
     <ClInclude Include="src\include\LuaBindings.h" />
+    <ClInclude Include="src\include\ECS\Systems\UpdateSystem.h" />
+    <ClInclude Include="src\include\ECS\Systems\ISystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

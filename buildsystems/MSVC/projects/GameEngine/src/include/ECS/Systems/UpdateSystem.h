@@ -5,5 +5,5 @@
 class UpdateSystem : public ISystem
 {
   public:
-    void OnUpdate(entt::registry&, float dt) override;
+    bool OnUpdate(entt::registry&, float dt) override;
 };

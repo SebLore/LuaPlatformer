@@ -4,7 +4,6 @@
 #include "Systems/InputSystem.h"
 #include "Systems/PhysicsSystem.h"
 #include "Systems/PlayerControllerSystem.h"
-#include "Systems/RenderSystem.h"
 #include "Systems/TestSystem.h"
 #include "Systems/UpdateSystem.h"
 // AUTO-GENERATED INCLUDES END (do not edit)

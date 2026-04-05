@@ -1,7 +1,8 @@
 #pragma once
 
-// Helper macro to avoid writing 'struct nameTag{};' for
-#define TAG(name) struct name##Tag {};
+// clang-format off
+struct EnemyTag {};
+struct PlayerTag{};
+struct RenderTag{};
 
-TAG(Player)
-TAG(Render)
+// clang-format on
