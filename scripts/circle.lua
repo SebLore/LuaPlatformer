@@ -1,11 +1,13 @@
-circle = { 
-  x = 200, 
-  y = 200, 
-  r = 30, 
+-- A simple circle that can be moved with the arrow keys
+circle = {
+  x = 200,
+  y = 200,
+  r = 30,
   speed = 200 }
 
 function init()
   -- optional init logic
+  print("Lua init called")
 end
 
 function update(dt)

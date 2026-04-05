@@ -1,6 +1,8 @@
 /**
  * @file main.cpp
- * @brief Main entry point for the application. Initializes the game, runs the main loop, and handles cleanup.
+ * @brief Main entry point for the application.
+ * 
+ * Initializes the game, runs the main loop, and handles cleanup.
  */
 
 #include "App.h"
@@ -10,7 +12,7 @@ int main(void)
     try
     {
         App app;
-        app.Initialize();
+
         return app.Run();
     }
     catch (const std::exception& e)

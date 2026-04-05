@@ -8,6 +8,7 @@
 #include "Assets/AssetManager.h"
 #include "LevelEditor/LevelData.h"
 #include "LuaWrapper.h"
+#include "Scene/Scene.h"
 
 namespace game
 {
@@ -17,7 +18,6 @@ namespace game
         Running,
         Paused,
         GameOver,
-        Editor,
         Exiting
     };
 
@@ -27,15 +27,16 @@ namespace game
         Game() = default;
         ~Game();
 
-        bool Initialize();
+        bool Initialize(Scene &scene);
         void Run();
 
         void HandleInput();
         void Update();
         void Draw();
 
+        bool Exiting()const { return m_State == GameState::Exiting; }
+
       private:
-        bool LoadScripts();
         bool LoadGameState();
         bool SetupInitialGameState();
 
@@ -54,15 +55,7 @@ namespace game
         void         SpawnPlayer();
 
       private:
-        static constexpr const char* SCRIPTS_DIR = "scripts";
-
-      private:
         GameState            m_State = GameState::Ready;
-        entt::registry       m_Registry{};
-        Lua::LuaWrapper      m_Lua{};
-        assets::AssetManager m_Assets{};
-
-        LevelData m_Level{};
-        TextureId m_TilesTexture{};
+        Scene* m_Scene = nullptr;
     };
 } // namespace game

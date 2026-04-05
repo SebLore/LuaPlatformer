@@ -7,16 +7,23 @@
 
 namespace game
 {
+    enum class TileType : std::uint8_t
+    {
+        Empty = 0,
+        Solid = 1
+    };
+
+
+
     class TileMap
     {
-      public:
-        using Tile = std::uint8_t;
-
-        static constexpr Tile Empty = 0;
-        static constexpr Tile Solid = 1;
-
+    public:
         TileMap() = default;
 
+        /// @brief Create a new tile map with the specified dimensions and tile size.
+        /// @param width The width of the tile map in tiles.
+        /// @param height The height of the tile map in tiles.
+        /// @param tileSize The dimensions of each tile in pixels.
         TileMap(int width, int height, int tileSize = 16) { Resize(width, height, tileSize); }
 
         void Resize(int width, int height, int tileSize = 16)
@@ -24,13 +31,19 @@ namespace game
             if (width <= 0 || height <= 0 || tileSize <= 0)
                 throw std::invalid_argument("TileMap dimensions must be > 0");
 
-            m_Width    = width;
-            m_Height   = height;
+            m_Width = width;
+            m_Height = height;
             m_TileSize = tileSize;
-            m_Tiles.assign(static_cast<size_t>(width * height), Empty);
+            m_Tiles.assign(static_cast<size_t>(width * height), TileType::Empty);
         }
 
-        void Clear(Tile value = Empty) { std::fill(m_Tiles.begin(), m_Tiles.end(), value); }
+
+        // use ranges if version >= c++20
+
+        void Clear(TileType value = TileType::Empty)
+        {
+            std::fill(m_Tiles.begin(), m_Tiles.end(), value);
+        }
 
         [[nodiscard]] int Width() const { return m_Width; }
         [[nodiscard]] int Height() const { return m_Height; }
@@ -41,15 +54,15 @@ namespace game
             return tx >= 0 && tx < m_Width && ty >= 0 && ty < m_Height;
         }
 
-        [[nodiscard]] Tile Get(int tx, int ty) const
+        [[nodiscard]] TileType Get(int tx, int ty) const
         {
             if (!InBounds(tx, ty))
-                return Empty;
+                return TileType::Empty;
 
             return m_Tiles[Index(tx, ty)];
         }
 
-        void Set(int tx, int ty, Tile value)
+        void Set(int tx, int ty, TileType value)
         {
             if (!InBounds(tx, ty))
                 return;
@@ -57,16 +70,16 @@ namespace game
             m_Tiles[Index(tx, ty)] = value;
         }
 
-        [[nodiscard]] const std::vector<Tile>& Raw() const { return m_Tiles; }
-        [[nodiscard]] std::vector<Tile>&       Raw() { return m_Tiles; }
+        [[nodiscard]] const std::vector<TileType>& Raw() const { return m_Tiles; }
+        [[nodiscard]] std::vector<TileType>& Raw() { return m_Tiles; }
 
-      private:
+    private:
         [[nodiscard]] int Index(int tx, int ty) const { return ty * m_Width + tx; }
 
-      private:
-        int               m_Width    = 0;
-        int               m_Height   = 0;
+    private:
+        int               m_Width = 0;
+        int               m_Height = 0;
         int               m_TileSize = 16;
-        std::vector<Tile> m_Tiles;
+        std::vector<TileType> m_Tiles;
     };
 } // namespace game
