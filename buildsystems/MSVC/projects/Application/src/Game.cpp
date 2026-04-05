@@ -17,21 +17,21 @@ namespace game
         // constants, maybe put in lua later
         constexpr float kMoveSpeed = 220.0f;
         constexpr float kJumpSpeed = -520.0f;
-        constexpr float kGravity   = 1600.0f;
+        constexpr float kGravity = 1600.0f;
 
-        bool RectHitsSolid(const LevelData& level, Rectangle rect)
+        bool RectHitsSolid(const level::LevelData& level, Rectangle rect)
         {
             const int tileSize = level.map.TileSize();
 
-            const int left   = static_cast<int>(rect.x) / tileSize;
-            const int right  = static_cast<int>(rect.x + rect.width - 1.0f) / tileSize;
-            const int top    = static_cast<int>(rect.y) / tileSize;
+            const int left = static_cast<int>(rect.x) / tileSize;
+            const int right = static_cast<int>(rect.x + rect.width - 1.0f) / tileSize;
+            const int top = static_cast<int>(rect.y) / tileSize;
             const int bottom = static_cast<int>(rect.y + rect.height - 1.0f) / tileSize;
 
             for (int ty = top; ty <= bottom; ++ty)
             {
                 for (int tx = left; tx <= right; ++tx)
-                    if (level.IsSolidForCollision(tx, ty))
+                    if (level.IsTileSolid(tx, ty))
                         return true;
             }
 
@@ -45,29 +45,25 @@ namespace game
             CloseWindow();
     }
 
-    bool Game::Initialize()
+    bool Game::Initialize(Scene& scene)
     {
-        SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
-        InitWindow(800, 600, "Raylib time!");
-        SetTargetFPS(60);
-
         if (!LoadScripts())
         {
             std::cerr << "Failed to load lua scripts. Exiting...\n";
             m_State = GameState::Exiting;
             return false;
         }
-
         if (!LoadGameState())
         {
             std::cerr << "Failed to load game state. Exiting...\n";
             m_State = GameState::Exiting;
             return false;
         }
-
+        m_Scene = &scene;
         m_State = GameState::Running;
         return true;
     }
+
 
     void Game::Run()
     {
@@ -77,35 +73,6 @@ namespace game
             Update();
             Draw();
         }
-    }
-
-    bool Game::LoadScripts()
-    {
-        m_Lua.SetScriptsPath(util::FindDirectory(SCRIPTS_DIR).string());
-
-        binding::lua_register_functions(m_Lua);
-        binding::lua_bind_ecs(m_Lua, m_Registry);
-
-        // Bind keys so Lua logic can use them later
-        m_Lua.SetGlobal("KEY_A", KEY_A);
-        m_Lua.SetGlobal("KEY_D", KEY_D);
-        m_Lua.SetGlobal("KEY_W", KEY_W);
-        m_Lua.SetGlobal("KEY_S", KEY_S);
-        m_Lua.SetGlobal("KEY_SPACE", KEY_SPACE);
-
-        m_Lua.SetGlobal("KEY_LEFT", KEY_LEFT);
-        m_Lua.SetGlobal("KEY_RIGHT", KEY_RIGHT);
-        m_Lua.SetGlobal("KEY_UP", KEY_UP);
-        m_Lua.SetGlobal("KEY_DOWN", KEY_DOWN);
-
-        // Optional global init() if some bootstrap script created it.
-        if (!CallLuaVoid0(m_Lua, "init"))
-        {
-            std::cerr << "Lua init() failed: " << m_Lua.Error() << "\n";
-            return false;
-        }
-
-        return true;
     }
 
     bool Game::LoadGameState() { return SetupInitialGameState(); }
@@ -188,7 +155,7 @@ namespace game
         const Rectangle src{ 0.0f, 0.0f, 16.0f, 16.0f }; // first 16x16 quadrant = tile "1"
 
         int height = m_Level.map.Height();
-        int width  = m_Level.map.Width();
+        int width = m_Level.map.Width();
 
         for (int y = 0; y < height; ++y)
         {
@@ -222,9 +189,9 @@ namespace game
 
         for (auto entity : view)
         {
-            const auto& pos      = view.get<components::Position>(entity);
+            const auto& pos = view.get<components::Position>(entity);
             const auto& collider = view.get<components::BoxCollider>(entity);
-            const auto& render   = view.get<components::DebugRenderRect>(entity);
+            const auto& render = view.get<components::DebugRenderRect>(entity);
 
             DrawRectangle(
                 static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(collider.size.x),
@@ -240,8 +207,8 @@ namespace game
 
         for (auto entity : view)
         {
-            auto& pos      = view.get<components::Position>(entity);
-            auto& vel      = view.get<components::Velocity>(entity);
+            auto& pos = view.get<components::Position>(entity);
+            auto& vel = view.get<components::Velocity>(entity);
             auto& collider = view.get<components::BoxCollider>(entity);
             auto& grounded = view.get<components::Grounded>(entity);
 
@@ -255,7 +222,7 @@ namespace game
 
             if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_SPACE)) && grounded.value)
             {
-                vel.y          = kJumpSpeed;
+                vel.y = kJumpSpeed;
                 grounded.value = false;
             }
 
@@ -269,13 +236,13 @@ namespace game
                 if (RectHitsSolid(m_Level, rect))
                 {
                     pos.x -= vel.x * dt;
-                    vel.x  = 0.0f;
+                    vel.x = 0.0f;
                 }
             }
 
             // Vertical move
-            pos.y          += vel.y * dt;
-            grounded.value  = false;
+            pos.y += vel.y * dt;
+            grounded.value = false;
             {
                 Rectangle rect{ pos.x, pos.y, collider.size.x, collider.size.y };
 
@@ -285,7 +252,7 @@ namespace game
                         grounded.value = true;
 
                     pos.y -= vel.y * dt;
-                    vel.y  = 0.0f;
+                    vel.y = 0.0f;
                 }
             }
         }

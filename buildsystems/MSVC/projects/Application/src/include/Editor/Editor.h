@@ -77,7 +77,12 @@ namespace editor
     {
         Gui  gui;
         bool enabled = true;
+        Scene* scene = nullptr;
 
+        void Initialize(Scene& scene)
+        {
+            this->scene = &scene;
+        }
         void Draw()
         {
             if (!enabled)

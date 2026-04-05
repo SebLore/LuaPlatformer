@@ -4,14 +4,14 @@
 #include <raylib.h>
 #include "Common/TileMap.h"
 
-namespace game
+namespace game::level
 {
     struct LevelData
     {
         TileMap   map;
         Rectangle playerSpawn{ 0, 0, 32, 64 };
 
-        bool IsSolidForCollision(int tx, int ty) const
+        bool IsTileSolid(int tx, int ty) const
         {
             if (tx < 0 || tx >= map.Width())
                 return true;
@@ -20,7 +20,7 @@ namespace game
             if (ty >= map.Height())
                 return true;
 
-            return map.Get(tx, ty) == TileMap::Solid;
+            return map.Get(tx, ty) == TileType::Solid;
         }
     };
 

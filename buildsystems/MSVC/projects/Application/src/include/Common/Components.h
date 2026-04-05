@@ -6,15 +6,19 @@
 
 namespace components
 {
+    struct Sprite2D
+    {
+        TextureId texture;
+        Rectangle src;
+        Rectangle dst;
+        Vector2 origin = { 0, 0 };
+        float rotation = 0.0f;
+        Color tint = RAYWHITE;
+    };
 
     struct PlayerTest
     {
-        TextureId texture;
-        Rectangle srcRect  = { 0, 0, 32, 32 };
-        Rectangle dstRect  = { 64, 64, 64, 64 };
-        Vector2   origin   = { 0, 0 };
-        float     rotation = 0;
-        Color     tint     = RAYWHITE;
+        Sprite2D sprite;
     };
 
     // config for dividing the playable level into a grid of cells, for things like collision and tile placement

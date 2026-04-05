@@ -13,21 +13,25 @@
   <ItemGroup>
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\include\Common\TileMap.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="tests\LuaWrapperTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\App.h" />
+    <ClInclude Include="src\include\Common\BaseComponents.h" />
+    <ClInclude Include="src\include\Common\RenderInfo.h" />
     <ClInclude Include="src\include\Common\TileMap.h" />
-    <ClInclude Include="src\include\Components.h" />
-    <ClInclude Include="src\include\Editor.h" />
-    <ClInclude Include="src\include\Game.h" />
+    <ClInclude Include="src\include\Common\Components.h" />
+    <ClInclude Include="src\include\Editor\Editor.h" />
+    <ClInclude Include="src\include\Game\Game.h" />
     <ClInclude Include="src\include\LevelEditor\LevelData.h" />
     <ClInclude Include="src\include\LevelEditor\LevelLoader.h" />
-    <ClInclude Include="src\include\parked.h" />
-    <ClInclude Include="src\include\Project.h" />
-    <ClInclude Include="src\include\Tags.h" />
+    <ClInclude Include="src\include\parked\parked.h" />
+    <ClInclude Include="src\include\Scene\Camera.h" />
+    <ClInclude Include="src\include\Scene\Scene.h" />
+    <ClInclude Include="src\include\Systems\DrawSystem.h" />
+    <ClInclude Include="src\include\Common\Tags.h" />
+    <ClInclude Include="src\include\Systems\SystemBase.h" />
     <ClInclude Include="tests\LuaWrapperTest.h" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ function Update(dt)
 end
 
 function Draw()
-  print("Drawing")
+  print("Drawing...")
   local p = ecs.get(e, "Position")
   local c = ecs.get(e, "Circle")
   ClearBackgroundRGBA(20,20,30,255)
