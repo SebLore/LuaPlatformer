@@ -14,6 +14,7 @@ namespace game
 {
     namespace
     {
+        // constants, maybe put in lua later
         constexpr float kMoveSpeed = 220.0f;
         constexpr float kJumpSpeed = -520.0f;
         constexpr float kGravity   = 1600.0f;
@@ -112,7 +113,7 @@ namespace game
     bool Game::SetupInitialGameState()
     {
         const char* texpath = "test_tiles.png";
-        m_TilesTexture = m_Assets.RegisterTexture(texpath);
+        m_TilesTexture      = m_Assets.RegisterTexture(texpath);
         if (!m_Assets.LoadTextureFile(m_TilesTexture))
         {
             std::cerr << "Failed to load tiles texture: " << texpath << "\n";
@@ -225,7 +226,8 @@ namespace game
             const auto& collider = view.get<components::BoxCollider>(entity);
             const auto& render   = view.get<components::DebugRenderRect>(entity);
 
-            DrawRectangle(static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(collider.size.x),
+            DrawRectangle(
+                static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(collider.size.x),
                 static_cast<int>(collider.size.y), render.color);
         }
     }
