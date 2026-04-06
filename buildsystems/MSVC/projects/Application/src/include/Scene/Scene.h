@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "ECS.hpp"
+#include "ECS/Systems/ISystem.h"
 #include "Camera.h"
 
 

@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="src\include\Caching\LRUCache.h">
-      <Filter>include\Engine\Caching</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\Caching\TextureCache.h">
-      <Filter>include\Engine\Caching</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\Core\ECS.h" />
-    <ClInclude Include="src\include\Core\Components.h" />
-    <ClInclude Include="src\include\Core\Systems.h" />
     <ClInclude Include="src\include\Assets\AssetCache.h" />
     <ClInclude Include="src\include\Assets\AssetId.h" />
     <ClInclude Include="src\include\Assets\AssetManager.h" />
@@ -19,8 +10,6 @@
     <ClInclude Include="src\include\Assets\AssetTags.h" />
     <ClInclude Include="src\include\Assets\AssetTraits.h" />
     <ClInclude Include="src\include\LuaBindings.h" />
-    <ClInclude Include="src\include\ECS\Systems\UpdateSystem.h" />
-    <ClInclude Include="src\include\ECS\Systems\ISystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

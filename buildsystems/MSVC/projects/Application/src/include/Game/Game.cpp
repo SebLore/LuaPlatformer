@@ -55,21 +55,10 @@ namespace game
         return true;
     }
 
-    void Game::Run()
-    {
-        while (!WindowShouldClose() && m_State != GameState::Exiting)
-        {
-            HandleInput();
-            Update();
-            Draw();
-        }
-    }
-
     bool Game::LoadGameState() { return SetupInitialGameState(); }
 
     bool Game::SetupInitialGameState()
     {
-        SpawnPlayer();
         return true;
     }
 

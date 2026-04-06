@@ -1,5 +1,7 @@
 #pragma once
 
+#include "LuaWrapper.h"
+#include "Assets/AssetManager.h"
 #include "Game/Game.h"
 #include "Editor/Editor.h"
 
@@ -40,6 +42,9 @@ class App
     void Draw();
     void SwitchMode(Mode newMode) { m_Mode = newMode; }
 
+    bool IsRunning() const { return m_State == State::Running; }
+    bool IsExiting() const { return m_State == State::Exiting; }
+
   private:
     Mode  m_Mode  = Mode::Editor;
     State m_State = State::Initialize;
@@ -48,6 +53,8 @@ class App
     editor::Editor m_Editor;
 
     Lua::LuaWrapper m_Lua;
+
+    assets::AssetManager m_Assets;
 
     std::vector<std::unique_ptr<Scene>> m_Scenes;
     int                                 m_SceneActiveIndex = 0;

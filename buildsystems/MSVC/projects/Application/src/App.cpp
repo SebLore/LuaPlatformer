@@ -2,14 +2,21 @@
 
 #include "LuaBindings.h"
 #include "Common/Components.h"
+#include "utility/fileutils.h"
 
 bool App::Initialize()
 {
+    SetupWindow();
+    if (!InitializeLua())
+        return false;
+
     LoadInitialScene();
 
     if (!m_Game.Initialize(ActiveScene()))
         return false;
     m_Editor.Initialize(ActiveScene());
+
+    m_State = State::Running;
 
     return true;
 }
@@ -18,14 +25,13 @@ void App::Shutdown() {}
 
 int App::Run()
 {
-    if (m_State == State::Initialize)
-        if (!Initialize())
-        {
-            std::cerr << "App initialization failed. Exiting...\n";
-            return EXIT_FAILURE;
-        }
+    if (m_State == State::Initialize && !Initialize())
+    {
+        std::cerr << "App initialization failed. Exiting...\n";
+        return EXIT_FAILURE;
+    }
 
-    while (!WindowShouldClose()) // TODO: maybe add some other exit condition
+    while (!WindowShouldClose() && !IsExiting()) // TODO: maybe add some other exit condition
     {
         Update();
         Draw();
@@ -73,6 +79,22 @@ void App::LoadInitialScene()
     // create a default scene, later load or configure from lua
     m_Scenes.push_back(std::make_unique<Scene>());
     m_SceneActiveIndex = 0;
+
+    {
+        auto& reg = ActiveScene().GetRegistry();
+        auto e = reg.create();
+
+        auto texId = m_Assets.RegisterTexture("test_tiles.png");
+        if (!m_Assets.TryGetTexture(texId))
+            m_Assets.LoadTextureFile(texId);
+
+        reg.emplace<components::Renderable>(e);
+        reg.emplace<components::Sprite2D>(e, components::Sprite2D{
+            .texture = texId,
+            .src = { 0, 0, 16, 16 },
+            .dst = { 100, 100, 16, 16 },
+            });
+    }
 }
 
 void App::Update()
@@ -82,7 +104,7 @@ void App::Update()
 
     if (m_Mode == Mode::MainMenu)
     {
-        // TODO: mainmenu stuff
+        // TODO: main menu stuff
     }
     else if (m_Mode == Mode::Game)
     {
@@ -106,6 +128,17 @@ void App::Draw()
     Scene& scene = ActiveScene();
 
     auto renderView = scene.GetRegistry().view<components::Renderable>();
+
+    for (auto entity : renderView)
+    {
+        // TODO: render the entity based on its components (e.g. Sprite, Transform2D, etc.)
+        if (auto sprite = scene.GetRegistry().try_get<components::Sprite2D>(entity))
+        {
+            // Draw the sprite
+            if (const auto tex = m_Assets.TryGetTexture(sprite->texture))
+                DrawTexturePro(*tex, sprite->src, sprite->dst, sprite->origin, sprite->rotation, sprite->tint);
+        }
+    }
 
     EndDrawing();
 }

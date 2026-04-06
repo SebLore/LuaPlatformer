@@ -19,13 +19,6 @@
     <ClInclude Include="src\include\Assets\AssetTraits.h" />
     <ClInclude Include="src\include\Assets\IAssetCache.h" />
     <ClInclude Include="src\include\Assets\RaylibTraits.h" />
-    <ClInclude Include="src\include\Caching\LRUCache.h" />
-    <ClInclude Include="src\include\Core\Components.h" />
-    <ClInclude Include="src\include\Core\ECS.h" />
-    <ClInclude Include="src\include\Caching\TextureCache.h" />
-    <ClInclude Include="src\include\Core\Systems.h" />
-    <ClInclude Include="src\include\ECS\Systems\ISystem.h" />
-    <ClInclude Include="src\include\ECS\Systems\UpdateSystem.h" />
     <ClInclude Include="src\include\LuaBindings.h" />
   </ItemGroup>
   <ItemGroup>

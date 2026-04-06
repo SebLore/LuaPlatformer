@@ -2,12 +2,6 @@
 
 #include <cstdint>
 
-#include <entt/entt.hpp>
-#include <raylib.h>
-
-#include "Assets/AssetManager.h"
-#include "LevelEditor/LevelData.h"
-#include "LuaWrapper.h"
 #include "Scene/Scene.h"
 
 namespace game
@@ -39,20 +33,6 @@ namespace game
       private:
         bool LoadGameState();
         bool SetupInitialGameState();
-
-        void DrawWorld();
-        void DrawDebug();
-        void DrawUI();
-
-        void DrawLevel() const;
-        void DrawSpawnMarker() const;
-        void DrawPlayers() const;
-
-        void UpdatePlayers(float dt);
-
-        entt::entity FindPlayer() const;
-        entt::entity GetOrCreatePlayer();
-        void         SpawnPlayer();
 
       private:
         GameState            m_State = GameState::Ready;
