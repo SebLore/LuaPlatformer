@@ -1,12 +1,15 @@
 #include "App.h"
 
-#include "LuaBindings.h"
 #include "Common/Components.h"
+
+#include "LuaBindings.h"
+
 #include "utility/fileutils.h"
 
 bool App::Initialize()
 {
     SetupWindow();
+
     if (!InitializeLua())
         return false;
 
@@ -14,8 +17,10 @@ bool App::Initialize()
 
     if (!m_Game.Initialize(ActiveScene()))
         return false;
+
     m_Editor.Initialize(ActiveScene());
 
+    // app is ready to start run loop
     m_State = State::Running;
 
     return true;
@@ -82,18 +87,19 @@ void App::LoadInitialScene()
 
     {
         auto& reg = ActiveScene().GetRegistry();
-        auto e = reg.create();
+        auto  e   = reg.create();
 
         auto texId = m_Assets.RegisterTexture("test_tiles.png");
         if (!m_Assets.TryGetTexture(texId))
             m_Assets.LoadTextureFile(texId);
 
         reg.emplace<components::Renderable>(e);
-        reg.emplace<components::Sprite2D>(e, components::Sprite2D{
-            .texture = texId,
-            .src = { 0, 0, 16, 16 },
-            .dst = { 100, 100, 16, 16 },
-            });
+        reg.emplace<components::Sprite2D>(
+            e, components::Sprite2D{
+                   .texture = texId,
+                   .src     = { 0, 0, 16, 16 },
+                   .dst     = { 100, 100, 16, 16 },
+               });
     }
 }
 

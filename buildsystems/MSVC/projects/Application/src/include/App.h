@@ -49,9 +49,8 @@ class App
     Mode  m_Mode  = Mode::Editor;
     State m_State = State::Initialize;
 
-    game::Game     m_Game;
-    editor::Editor m_Editor;
-
+    game::Game      m_Game;
+    editor::Editor  m_Editor;
     Lua::LuaWrapper m_Lua;
 
     assets::AssetManager m_Assets;
