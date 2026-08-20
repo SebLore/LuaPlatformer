@@ -2,6 +2,8 @@
 
 #include <raylib.h>
 
+#include <cstring>
+
 #include "Assets/AssetTags.h"
 
 namespace components
@@ -35,4 +37,15 @@ namespace components
     {
     };
 
+    ///// Special component to be registered through Lua when creating new behaviours.
+    //struct Behaviour
+    //{
+    //    char path[64] = {0};
+    //    int luaRef = -1;
+
+    //    Behaviour(const char * path, luaRef) : LuaRef(luaRef)
+    //    {
+    //        memset()
+    //    }
+    //};
 } // namespace components

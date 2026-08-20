@@ -27,6 +27,9 @@
     <ClCompile Include="src\include\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\include\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tests\LuaWrapperTest.h">
@@ -57,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\include\Common\Tags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\Scene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\include\Scene\Camera.h">

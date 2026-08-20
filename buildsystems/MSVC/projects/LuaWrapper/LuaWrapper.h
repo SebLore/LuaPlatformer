@@ -1,13 +1,23 @@
 #pragma once
 
-#include "lua.hpp"
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+#ifdef __cplusplus
+}
+#endif
+// #include "lua.hpp"
 
 // STL
 #include <filesystem>
 #include <string>
+
 namespace Lua
 {
-
     namespace fs = std::filesystem;
 
     class LuaWrapper
@@ -70,10 +80,9 @@ namespace Lua
       private:
         bool HandleStatus(int status, const char* where);
 
-        fs::path ResolveScriptPath(const std::string& file) const;
-        void     AddToPackagePath(const std::string& dir) const;
-        std::string
-        ResolveWithPackageSearchPath(const std::string& fileOrModule) const;
+        fs::path    ResolveScriptPath(const std::string& file) const;
+        void        AddToPackagePath(const std::string& dir) const;
+        std::string ResolveWithPackageSearchPath(const std::string& fileOrModule) const;
 
       private:
         lua_State*  L = nullptr;

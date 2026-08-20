@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\include\Game\Game.cpp" />
+    <ClCompile Include="src\include\Scene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="tests\LuaWrapperTest.cpp" />
   </ItemGroup>
@@ -28,7 +29,6 @@
     <ClInclude Include="src\include\LevelEditor\LevelLoader.h" />
     <ClInclude Include="src\include\parked\parked.h" />
     <ClInclude Include="src\include\Scene\Camera.h" />
-    <ClInclude Include="src\include\Scene\Scene.h" />
     <ClInclude Include="src\include\Game\Systems\DrawSystem.h" />
     <ClInclude Include="src\include\Common\Tags.h" />
     <ClInclude Include="src\include\Game\Systems\SystemBase.h" />

@@ -1,4 +1,3 @@
-#include "Debug.h"
 #include "ECS.hpp"
 #include "Engine.h"
 #include "GUI/FileDialog.h"
@@ -26,30 +25,22 @@ namespace
         Texture2D* tex = e.LoadTexture("circle.png");
 
         // register player components
-        s.RegisterComponent<PlayerController>(
-            pid,
-            PlayerController{ .moveSpeed = 300.0f, .jumpSpeed = 200.0f });
+        s.RegisterComponent<PlayerController>(pid, PlayerController{ .moveSpeed = 300.0f, .jumpSpeed = 200.0f });
         s.RegisterComponent<PhysicsBody>(
-            pid,
-            PhysicsBody{
-                .dynamic      = true,
-                .grounded     = true,
-                .gravityScale = 1.0f,
-            });
+            pid, PhysicsBody{
+                     .dynamic      = true,
+                     .grounded     = true,
+                     .gravityScale = 1.0f,
+                 });
         s.RegisterComponent<Velocity>(pid, Velocity{ 0.0f, 0.0f });
-        s.RegisterComponent<components::Position>(
-            pid,
-            components::Position{ 0.0f, 0.0f });
-        s.RegisterComponent<cmp::Transform>(
-            pid,
-            cmp::Transform{ 10.0f, 10.0f });
+        s.RegisterComponent<components::Position>(pid, components::Position{ 0.0f, 0.0f });
+        s.RegisterComponent<cmp::Transform>(pid, cmp::Transform{ 10.0f, 10.0f });
         s.RegisterComponent<Drawable>(
-            pid,
-            Drawable{ .texture = tex,
-                      .srcRect = { 0, 0, 32.0f, 64.0f },
-                      .scale   = { 1.0f, 1.0f },
-                      .origin  = { 0, 0 },
-                      .tint    = WHITE });
+            pid, Drawable{ .texture = tex,
+                           .srcRect = { 0, 0, 32.0f, 64.0f },
+                           .scale   = { 1.0f, 1.0f },
+                           .origin  = { 0, 0 },
+                           .tint    = WHITE });
     }
 } // namespace
 
@@ -65,28 +56,16 @@ namespace proto
         {
             using namespace components;
 
-            auto pView = r.view<
-                PlayerController,
-                PhysicsBody,
-                Sprite,
-                Velocity,
-                components::Position>();
+            auto pView = r.view<PlayerController, PhysicsBody, Sprite, Velocity, components::Position>();
 
-            pView.each([&](entt::entity      e,
-                           PlayerController& pc,
-                           PhysicsBody&      pb,
-                           Sprite&           s,
-                           Velocity&         v,
-                           Position&         pos) {});
+            pView.each(
+                [&](entt::entity e, PlayerController& pc, PhysicsBody& pb, Sprite& s, Velocity& v, Position& pos) {});
         }
     };
 
     static Camera2D CreateCamera2D(CameraConfig& cfg)
     {
-        Camera2D cam = { .offset   = cfg.Offset,
-                         .target   = cfg.Target,
-                         .rotation = cfg.Rotation,
-                         .zoom     = cfg.Zoom };
+        Camera2D cam = { .offset = cfg.Offset, .target = cfg.Target, .rotation = cfg.Rotation, .zoom = cfg.Zoom };
 
         return cam;
     }
@@ -141,12 +120,8 @@ namespace proto
             uint32_t y = i / 32;
             tile     t = tiles[i];
             DrawTexturePro(
-                *texture,
-                srcRects[static_cast<uint32_t>(t)],
-                Rectangle{ x * bigSize, y * bigSize, bigSize, bigSize },
-                Vector2{ 0, 0 },
-                0,
-                WHITE);
+                *texture, srcRects[static_cast<uint32_t>(t)], Rectangle{ x * bigSize, y * bigSize, bigSize, bigSize },
+                Vector2{ 0, 0 }, 0, WHITE);
         }
     }
 } // namespace proto
@@ -275,19 +250,18 @@ int main(void)
     float screenHeight = cfg.Window.Height;
 
     {
-        CameraConfig camCfg = {
-            // Camera2D
-            .Offset   = { 0, 0 },
-            .Target   = { screenWidth * 0.5f, screenHeight * 0.5f },
-            .Rotation = 0.0f,
-            .Zoom     = 1.0f,
+        CameraConfig camCfg = { // Camera2D
+                                .Offset   = { 0, 0 },
+                                .Target   = { screenWidth * 0.5f, screenHeight * 0.5f },
+                                .Rotation = 0.0f,
+                                .Zoom     = 1.0f,
 
-            // Other settings
-            .Origin   = { 0, 0 },
-            .ZoomBase = 1.0f,
-            .ZoomMin  = 0.1f,
-            .ZoomMax  = 3.0f,
-            .ZoomStep = 0.1f
+                                // Other settings
+                                .Origin   = { 0, 0 },
+                                .ZoomBase = 1.0f,
+                                .ZoomMin  = 0.1f,
+                                .ZoomMax  = 3.0f,
+                                .ZoomStep = 0.1f
         };
 
         entt::entity eCam = scene.Create();
@@ -318,9 +292,8 @@ int main(void)
     }
 
     // prototype: testing raygui by creating a simple file dialog window
-    const char*                   cwd = GetWorkingDirectory();
-    gui::GuiWindowFileDialogState fileDialog =
-        gui::InitGuiWindowFileDialog(cwd, 400, 300);
+    const char*                   cwd        = GetWorkingDirectory();
+    gui::GuiWindowFileDialogState fileDialog = gui::InitGuiWindowFileDialog(cwd, 400, 300);
 
     Texture2D* tileTexture = engine.LoadTexture("test_tiles.png");
     if (!tileTexture)
@@ -332,12 +305,7 @@ int main(void)
 
     Rectangle srcTiles[4];
     for (int i = 0; i < 4; i++)
-    {
-        srcTiles[i] = Rectangle{ static_cast<float>((i % 2) * 16),
-                                 static_cast<float>((i / 2)) * 16.0f,
-                                 16.0f,
-                                 16.0f };
-    }
+        srcTiles[i] = Rectangle{ static_cast<float>((i % 2) * 16), static_cast<float>((i / 2)) * 16.0f, 16.0f, 16.0f };
     constexpr int dims = 8;
 
     Rectangle dstTiles[dims * dims] = { 0 };
@@ -354,8 +322,7 @@ int main(void)
                 float x = 0, y = 0;
 
                 if (j == 0)
-                    dstTiles[i * dims + j] =
-                        Rectangle{ x * dims, y * dims, dims, dims };
+                    dstTiles[i * dims + j] = Rectangle{ x * dims, y * dims, dims, dims };
             }
         }
     }

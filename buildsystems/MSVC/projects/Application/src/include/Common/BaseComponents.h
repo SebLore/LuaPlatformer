@@ -13,7 +13,9 @@ namespace components
 
     struct Transform
     {
-        Vector2 position{ 0, 0 };
+        Vector2 position{ .x = 0, .y = 0 };
+        float   rotation = 0;
+        Vector2 scale{ .x = 1, .y = 1 };
     };
 
     struct Velocity : Vector2
