@@ -1,42 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36915.13 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11828.311 oobstable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documents", "documents", "{596A5C1D-6449-4158-89C9-71482986714A}"
-	ProjectSection(SolutionItems) = preProject
-		..\documents\InputState.txt = ..\documents\InputState.txt
-		..\documents\ProjectOutline.md = ..\documents\ProjectOutline.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{50E77301-B384-4084-B3CC-A16650D24B9A}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\scripts\circle.lua = ..\..\scripts\circle.lua
-		..\..\scripts\ecs_test.lua = ..\..\scripts\ecs_test.lua
-		..\..\scripts\lua_script.lua = ..\..\scripts\lua_script.lua
-		..\..\scripts\levels\testlevel.lua = ..\..\scripts\levels\testlevel.lua
-		..\..\scripts\test_raylib.lua = ..\..\scripts\test_raylib.lua
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "projects\Application\Application.vcxproj", "{F4325F8C-4757-4D8A-83C3-3487357E8AB6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{07CC695A-E566-47DD-9BD2-CBDDA105AAEE} = {07CC695A-E566-47DD-9BD2-CBDDA105AAEE}
-		{695CBAC2-8736-40F7-8475-0DEBACE9F203} = {695CBAC2-8736-40F7-8475-0DEBACE9F203}
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6} = {89243183-0EF4-43CA-A5DE-2CEC2C875AC6}
-		{B4203D97-F0CA-431B-AD3C-614B754939F1} = {B4203D97-F0CA-431B-AD3C-614B754939F1}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "projects\GameEngine\GameEngine.vcxproj", "{695CBAC2-8736-40F7-8475-0DEBACE9F203}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaCompile", "projects\luaCompile\luaCompile.vcxproj", "{07CC695A-E566-47DD-9BD2-CBDDA105AAEE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raylib", "projects\raylib\raylib.vcxproj", "{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaWrapper", "projects\LuaWrapper\LuaWrapper.vcxproj", "{B4203D97-F0CA-431B-AD3C-614B754939F1}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utility", "projects\Utility\Utility.vcxproj", "{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +25,6 @@ Global
 		{F4325F8C-4757-4D8A-83C3-3487357E8AB6}.Debug|x64.Build.0 = Debug|x64
 		{F4325F8C-4757-4D8A-83C3-3487357E8AB6}.Release|x64.ActiveCfg = Release|x64
 		{F4325F8C-4757-4D8A-83C3-3487357E8AB6}.Release|x64.Build.0 = Release|x64
-		{695CBAC2-8736-40F7-8475-0DEBACE9F203}.Debug|x64.ActiveCfg = Debug|x64
-		{695CBAC2-8736-40F7-8475-0DEBACE9F203}.Debug|x64.Build.0 = Debug|x64
-		{695CBAC2-8736-40F7-8475-0DEBACE9F203}.Release|x64.ActiveCfg = Release|x64
-		{695CBAC2-8736-40F7-8475-0DEBACE9F203}.Release|x64.Build.0 = Release|x64
 		{07CC695A-E566-47DD-9BD2-CBDDA105AAEE}.Debug|x64.ActiveCfg = Debug|x64
 		{07CC695A-E566-47DD-9BD2-CBDDA105AAEE}.Debug|x64.Build.0 = Debug|x64
 		{07CC695A-E566-47DD-9BD2-CBDDA105AAEE}.Release|x64.ActiveCfg = Release|x64
@@ -60,14 +33,6 @@ Global
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}.Debug|x64.Build.0 = Debug|x64
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}.Release|x64.ActiveCfg = Release|x64
 		{89243183-0EF4-43CA-A5DE-2CEC2C875AC6}.Release|x64.Build.0 = Release|x64
-		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Debug|x64.ActiveCfg = Debug|x64
-		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Debug|x64.Build.0 = Debug|x64
-		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Release|x64.ActiveCfg = Release|x64
-		{B4203D97-F0CA-431B-AD3C-614B754939F1}.Release|x64.Build.0 = Release|x64
-		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Debug|x64.ActiveCfg = Debug|x64
-		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Debug|x64.Build.0 = Debug|x64
-		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Release|x64.ActiveCfg = Release|x64
-		{ED044D5F-477C-4F6D-B7D5-40EB5DA6003A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

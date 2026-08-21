@@ -1,4 +1,4 @@
-dofile("scripts/common.lua")
+require "scripts.common"
 
 local playerColors = {
     colors.blue,
@@ -47,6 +47,12 @@ function player.Create(x, y, number)
     scene.SetComponent(
         entity,
         "player"
+    )
+
+    scene.SetComponent(
+        entity,
+        "behaviour",
+        "scripts/controllers/player_controller.lua"
     )
 
     return entity

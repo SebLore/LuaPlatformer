@@ -1,5 +1,9 @@
 local platform = {}
 
+local objects =
+    require "scripts.level.objects"
+
+
 function platform:OnCreate()
     local transform =
         scene.GetComponent(
@@ -8,9 +12,6 @@ function platform:OnCreate()
         )
 
     self.startX = transform.x
-    self.distance = 150
-
-    self.speed = 100
     self.direction = 1
 end
 
@@ -22,7 +23,11 @@ function platform:OnUpdate(delta)
                 "transform"
             )
 
-        if transform.x >= self.startX + self.distance then
+        local definition =
+            objects.definitions.platform
+
+        if transform.x >=
+            self.startX + definition.distance then
             self.direction = -1
         elseif transform.x <= self.startX then
             self.direction = 1
@@ -31,7 +36,7 @@ function platform:OnUpdate(delta)
         scene.SetComponent(
             self.ID,
             "velocity",
-            self.speed * self.direction,
+            definition.speed * self.direction,
             0
         )
 
