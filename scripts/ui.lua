@@ -1,3 +1,5 @@
+-- for now handles creating text as entities, later buttons and more
+
 local ui = {}
 
 function ui.CreateText(x, y, text, fontSize, r, g, b)

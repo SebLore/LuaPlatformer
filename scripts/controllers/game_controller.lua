@@ -1,64 +1,61 @@
+-- main game controller that handles the game loop, player turns, and scoring
 local playerModule = require "scripts.player"
 local ui = require "scripts.ui"
 local objects = require "scripts.level.objects"
 local levelIO = require "scripts.level.level_io"
+local level   = require "scripts.level.level"
 
 local controller = {}
 
 function controller:OnCreate()
+    -- game specific data
     self.playerCount = 2
     self.maxRounds = 3
-
     self.round = 1
     self.currentPlayer = 1
+    self.activePlayerEntity = nil
 
+    -- game state
+    self.phase = "PLACEMENT"    -- always start on placement phase
+    self.selectedItem = "spike" -- default to spike
+    self.placedObjects = {}
+    self.gameOverText = ""
+
+    -- scores for each player, initialize to 0
     self.scores = {}
-
     for i = 1, self.playerCount do
         self.scores[i] = 0
     end
 
-    self.activePlayerEntity = nil
-
+    -- ui 
     self.statusUI = nil
     self.scoreUI = nil
 
+    -- for handling ghosts during placement
     self.ghostEntity = nil
     self.ghostOffset = 0
     self.ghostDirection = 1
 
-    self.spawnX = 200
-    self.spawnY = 500
-
-    self.phase = "PLACEMENT"
-    self.selectedItem = "spike"
-
-    self.placedObjects = {}
-
-    self.gameOverText = ""
+    -- level specific data TODO: move to level
+   self.spawnX = level.start.x
+   self.spawnY = level.start.y
 
     self:CreateUI()
 
+    -- debug printing
     print("Game started")
     print("Round:", self.round)
-
-    print(
-        "Placement: Player",
-        self.currentPlayer,
-        "- press 1/2 and click"
-    )
 end
 
 function controller:CreateUI()
     self.statusUI =
         ui.CreateText(
-            20,
-            20,
-            "",
-            28,
-            0,
-            0,
-            0
+            20, 20, -- xy
+            "",     -- text
+            28,     -- font size
+            0,      -- color r
+            0,      -- color g
+            0       -- color b
         )
 
     self.scoreUI =
@@ -74,8 +71,10 @@ function controller:CreateUI()
 end
 
 function controller:UpdateUI()
+    -- ui text
     local statusText = ""
 
+    -- placement phase
     if self.phase == "PLACEMENT" then
         local itemName = self.selectedItem
 
@@ -95,6 +94,7 @@ function controller:UpdateUI()
             .. " Placing "
             .. itemName
             .. "   [1/2 Select] [S Save] [L Load]"
+
     elseif self.phase == "PLAYING" then
         statusText =
             "Round "

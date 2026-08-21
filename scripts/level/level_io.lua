@@ -1,7 +1,8 @@
-
+-- handle saving and loading of placed objects
+-- this should go with the level editor but for now we just force it into the placement phase
 local levelIO = {}
 
-local savePath = "level_save.txt"
+local savePath = "TTD_Save.txt"
 
 
 function levelIO.Save(objects)
@@ -39,7 +40,10 @@ function levelIO.Load()
         return objects
     end
 
+    -- read each line and parse the object type and position
     for line in file:lines() do
+
+        -- regex to match the object type then x y coords
         local objectType, x, y =
             line:match(
                 "(%S+)%s+(%-?[%d%.]+)%s+(%-?[%d%.]+)"

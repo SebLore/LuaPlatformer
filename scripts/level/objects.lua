@@ -1,6 +1,8 @@
-
+-- all the objects created inside the ECS and placable
+-- in a level
 local objects = {}
 
+-- table of object definitions, used for creating and updating objects
 objects.definitions = {
     spike = {
         width = 25,

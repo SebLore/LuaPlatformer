@@ -1,132 +1,38 @@
-require "scripts.level.objects"
-
+-- create a simple rectangle terrain
+-- TODO: have it use texture instead of flat colour
 local terrain = {}
 
-function terrain.Create()
-
-    -- entity
-    local e = scene.CreateEntity()
+function terrain.Create(x, y, width, height, color)
+    local entity = scene.CreateEntity()
 
     scene.SetComponent(
-        e,
+        entity,
         "transform",
-        100,
-        600
+        x,
+        y
     )
 
-    -- ground
     scene.SetComponent(
-        e,
+        entity,
         "collider",
-        1000,
-        60
+        width,
+        height
     )
 
     scene.SetComponent(
-        e,
+        entity,
         "renderable",
-        80,
-        80,
-        80
+        color[1],
+        color[2],
+        color[3]
     )
 
     scene.SetComponent(
-        e,
+        entity,
         "solid"
     )
 
-
-
-
-    -- Raised platform
-    local platform = scene.CreateEntity()
-
-    scene.SetComponent(
-        platform,
-        "transform",
-        550,
-        450
-    )
-
-    scene.SetComponent(
-        platform,
-        "collider",
-        250,
-        30
-    )
-
-    scene.SetComponent(
-        platform,
-        "renderable",
-        100,
-        100,
-        100
-    )
-
-    scene.SetComponent(
-        platform,
-        "solid"
-    )
-
-    -- Temporary static spike hazard
-    local spike = scene.CreateEntity()
-
-    scene.SetComponent(
-        spike,
-        "transform",
-        500,
-        570
-    )
-
-    scene.SetComponent(
-        spike,
-        "collider",
-        50,
-        80
-    )
-
-    scene.SetComponent(
-        spike,
-        "renderable",
-        220,
-        40,
-        40
-    )
-
-    scene.SetComponent(
-        spike,
-        "hazard"
-    )
-
-    -- Add goal
-    local goal = scene.CreateEntity()
-
-    scene.SetComponent(
-        goal,
-        "transform",
-        1000,
-        500
-    )
-
-    scene.SetComponent(
-        goal,
-        "collider",
-        50,
-        100
-    )
-
-    scene.SetComponent(
-        goal,
-        "renderable",
-        40,
-        200,
-        80
-    )
-
-    scene.SetComponent(
-        goal,
-        "goal"
-    )
+    return entity
 end
 
 return terrain

@@ -1,8 +1,7 @@
+-- behaviour for a moving platform that oscillates horisontally
+local objects = require "scripts.level.objects"
+
 local platform = {}
-
-local objects =
-    require "scripts.level.objects"
-
 
 function platform:OnCreate()
     local transform =

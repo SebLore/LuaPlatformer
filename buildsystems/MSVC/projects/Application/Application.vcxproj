@@ -82,6 +82,18 @@
       <AdditionalLibraryDirectories>$(LibOutputDir)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(LuaLib);$(rlLibs);$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>echo ProjectDir: $(ProjectDir)
+echo TargetDir: $(TargetDir)
+
+if not exist "$(TargetDir)scripts" mkdir "$(TargetDir)scripts"
+
+xcopy "$(ProjectDir)..\..\..\..\scripts\*" "$(TargetDir)scripts\" /E /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -93,14 +105,26 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(IncludeExternalDependencies);$(Projects);$(Projects)Utility;$(Projects)\LuaWrapper;$(GameEngine);$(ProjectDir)src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludeExternalDependencies);$(Projects);$(ProjectDir)src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LibOutputDir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(LuaLib);$(rlLibs);LuaWrapper.lib;GameEngine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(LuaLib);$(rlLibs);$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>echo ProjectDir: $(ProjectDir)
+echo TargetDir: $(TargetDir)
+
+if not exist "$(TargetDir)scripts" mkdir "$(TargetDir)scripts"
+
+xcopy "$(ProjectDir)..\..\..\..\scripts\*" "$(TargetDir)scripts\" /E /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

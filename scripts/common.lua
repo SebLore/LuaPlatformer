@@ -1,3 +1,5 @@
+-- globally used values like colors etc.
+
 colors = {
     blue   = {50,  120, 255 },
     red    = {255, 80,  80 },

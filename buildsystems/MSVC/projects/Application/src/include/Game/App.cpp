@@ -16,6 +16,13 @@ bool App::Initialize()
     InitWindow(1280, 720, "Lua ECS Platformer");
     SetTargetFPS(60);
 
+    // run relative to the exe
+    if (!ChangeDirectory(GetApplicationDirectory()))
+    {
+        TraceLog(LOG_ERROR, "Failed to set application directory");
+        return false;
+    }
+
     if (!InitializeLua())
         return false;
 
@@ -95,7 +102,7 @@ int App::Run() const
 
 void App::Shutdown()
 {
-    // want to ensure scene is destroyed before lua is to avoid orphan lua references
+    // want to ensure scene is destroyed before lua is to avoid unreleased lua references
     m_Scene.reset();
 
     if (m_L != nullptr)

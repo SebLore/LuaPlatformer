@@ -1,3 +1,5 @@
+-- player create script
+
 require "scripts.common"
 
 local playerColors = {
@@ -9,6 +11,7 @@ local playerColors = {
 
 local player = {}
 
+-- create a new player in the x, y coordinates. number decides color
 function player.Create(x, y, number)
     local entity = scene.CreateEntity()
 
