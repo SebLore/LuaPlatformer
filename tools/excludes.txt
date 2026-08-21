@@ -1,7 +1,0 @@
-# keywords (plain text)
-ISystem
-
-
-# regex (must be quoted)
-"^(Tests|test)/"
-"\\.generated\\.(h|hpp)$"
