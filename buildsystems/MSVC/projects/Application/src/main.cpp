@@ -9,6 +9,8 @@
 #include <memory>
 
 #include <raylib.h>
+
+#include "LuaInput.hpp"
 #include "Scene.hpp"
 
 extern "C"
@@ -37,8 +39,16 @@ int main()
 
     luaL_openlibs(L);
 
+    LuaInput::Open(L);
+
     Scene scene;
+    scene.AddSystem<systems::BehaviourSystem>(L);
+    scene.AddSystem<systems::PlayerInputSystem>();
+    scene.AddSystem<systems::GravitySystem>();
     scene.AddSystem<systems::MovementSystem>();
+    scene.AddSystem<systems::CollisionSystem>();
+    scene.AddSystem<systems::InteractionSystem>();
+
     Scene::lua_openscene(L, &scene);
 
     int status = luaL_dofile(L, "scripts/test.lua");
@@ -50,8 +60,6 @@ int main()
 
         lua_pop(L, 1);
     }
-    else
-        scene.DebugTransforms();
 
     while (!WindowShouldClose())
     {

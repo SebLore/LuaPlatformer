@@ -26,6 +26,79 @@ namespace components
     {
     };
 
+    // special component for creating behaviour/coroutines inside of lua
+    //struct Behaviour
+    //{
+    //    std::string scriptPath;
+    //    int tableRef = LUA_NOREF;
+
+    //    int threadRef = LUA_NOREF;
+    //    bool started = false;
+    //    bool finished = false;
+    //};
+
+    /// Special component to be registered through Lua when creating new behaviours.
+    struct Behaviour
+    {
+        char scriptPath[64];
+        int  luaRef = LUA_NOREF; // table reference
+
+        int  threadRef = LUA_NOREF; // thread reference holding coroutine alive
+        bool started   = false;
+        bool finished  = false;
+
+        Behaviour(const char* path, int luaRef) : luaRef(luaRef)
+        {
+            memset(scriptPath, '\0', 64);
+
+            strcpy_s(this->scriptPath, sizeof(this->scriptPath), path);
+        }
+    };
+
+    struct Collider
+    {
+        Vector2 size{ 0.0f, 0.0f };
+    };
+
+    struct Renderable
+    {
+        Color color = WHITE;
+    };
+
+    struct Solid
+    {
+    };
+
+    struct Hazard
+    {
+    };
+
+    struct Goal
+    {
+    };
+
+    struct Player
+    {
+        bool grounded    = false;
+        bool dead        = false;
+        bool reachedGoal = false;
+    };
+
+    struct UIText
+    {
+        char text[256];
+
+        int   fontSize;
+        Color color;
+
+        UIText(const char* text, int fontSize = 24, Color color = BLACK) : fontSize(fontSize), color(color)
+        {
+            memset(this->text, '\0', sizeof(this->text));
+            strcpy_s(this->text, sizeof(this->text), text);
+        }
+    };
+
+    // -- OLD STUFF DO NOT USE -- //
     struct AABBCollider
     {
         Vector2 halfExtents{ 16, 16 };

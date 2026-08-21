@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="src\include\Game\Game.cpp" />
     <ClCompile Include="src\include\Scene.cpp" />
+    <ClCompile Include="src\LuaInput.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="tests\LuaWrapperTest.cpp" />
   </ItemGroup>

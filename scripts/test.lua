@@ -1,16 +1,14 @@
-print("Lua started")
+local terrain =
+    dofile("scripts/terrain.lua")
 
-local entity = scene.CreateEntity()
+terrain.Create()
 
-print("Created entity:", entity)
+
+local gameController =
+    scene.CreateEntity()
 
 scene.SetComponent(
-    entity,
-    "transform",
-    300,
-    200
+    gameController,
+    "behaviour",
+    "scripts/behaviours/game_controller.lua"
 )
-
-scene.SetComponent(entity, "velocity", 10, 0)
-
-print("Transform added")
