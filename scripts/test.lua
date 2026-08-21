@@ -11,4 +11,6 @@ scene.SetComponent(
     200
 )
 
+scene.SetComponent(entity, "velocity", 10, 0)
+
 print("Transform added")

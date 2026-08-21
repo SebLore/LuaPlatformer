@@ -21,9 +21,6 @@
     <ClCompile Include="tests\LuaWrapperTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\include\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,9 +45,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\include\LevelEditor\LevelLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\include\Editor\Editor.h">

@@ -5,8 +5,10 @@
  * Initializes the game, runs the main loop, and handles cleanup.
  */
 
-#include <raylib.h>
+#include <vector>
+#include <memory>
 
+#include <raylib.h>
 #include "Scene.hpp"
 
 extern "C"
@@ -36,6 +38,7 @@ int main()
     luaL_openlibs(L);
 
     Scene scene;
+    scene.AddSystem<systems::MovementSystem>();
     Scene::lua_openscene(L, &scene);
 
     int status = luaL_dofile(L, "scripts/test.lua");
@@ -52,10 +55,13 @@ int main()
 
     while (!WindowShouldClose())
     {
-        BeginDrawing();
+        const float dt = GetFrameTime();
 
+        scene.Update(dt);
+
+        BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("Raylib + Lua + EnTT are running.", 40, 40, 30, BLACK);
+
         scene.Draw();
 
         EndDrawing();

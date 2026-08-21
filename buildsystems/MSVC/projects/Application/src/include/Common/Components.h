@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 #include <cstring>
+#include "lua.hpp"
 
 #include "Assets/AssetTags.h"
 
@@ -37,15 +38,21 @@ namespace components
     {
     };
 
-    ///// Special component to be registered through Lua when creating new behaviours.
-    //struct Behaviour
-    //{
-    //    char path[64] = {0};
-    //    int luaRef = -1;
+    /// Special component to be registered through Lua when creating new behaviours.
+    struct Behaviour
+    {
+        char path[64];
+        int  luaRef    = LUA_NOREF; // table reference
+        int  threadRef = LUA_NOREF; // thread reference holding coroutine alive
 
-    //    Behaviour(const char * path, luaRef) : LuaRef(luaRef)
-    //    {
-    //        memset()
-    //    }
-    //};
+        bool started  = false;
+        bool finished = false;
+
+        Behaviour(const char* path, int luaRef, int threadRef) : luaRef(luaRef), threadRef(threadRef)
+        {
+            memset(this->path, '\0', 64);
+
+            strcpy_s(this->path, sizeof(this->path), path);
+        }
+    };
 } // namespace components

@@ -11,14 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\include\Game\Game.cpp" />
     <ClCompile Include="src\include\Scene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="tests\LuaWrapperTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\include\App.h" />
     <ClInclude Include="src\include\Common\BaseComponents.h" />
     <ClInclude Include="src\include\Common\RenderInfo.h" />
     <ClInclude Include="src\include\Common\TileMap.h" />
@@ -95,7 +93,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LibOutputDir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(LuaLib);$(rlLibs);LuaWrapper.lib;GameEngine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(LuaLib);$(rlLibs);LuaWrapper.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
