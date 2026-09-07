@@ -47,10 +47,11 @@ function controller:OnCreate()
     print("Round:", self.round)
 end
 
+-- display game status and scores
 function controller:CreateUI()
     self.statusUI =
         ui.CreateText(
-            20, 20, -- xy
+            20, 20, -- x, y
             "",     -- text
             28,     -- font size
             0,      -- color r
@@ -188,6 +189,7 @@ function controller:UpdateGhost(delta)
     local x, y =
         input.GetMousePosition()
 
+    -- TODO: have this be a behaviour
     if self.selectedItem == "platform" then
         local definition =
             objects.definitions.platform
@@ -354,14 +356,11 @@ function controller:GameOver()
     print("GAME OVER")
 
     if self.scores[1] > self.scores[2] then
-        self.gameOverText =
-        "Game Over - Player 1 Wins!"
+        self.gameOverText = "Game Over - Player 1 Wins!"
     elseif self.scores[2] > self.scores[1] then
-        self.gameOverText =
-        "Game Over - Player 2 Wins!"
+        self.gameOverText = "Game Over - Player 2 Wins!"
     else
-        self.gameOverText =
-        "Game Over - Draw!"
+        self.gameOverText = "Game Over - Draw!"
     end
 
     for i = 1, self.playerCount do
@@ -380,11 +379,12 @@ function controller:SavePlacedObjects()
     )
 end
 
+
+-- Load placed objects TODO: have this manage variable parameters
 function controller:LoadPlacedObjects()
     self:ClearPlacedObjects()
 
-    local loadedObjects =
-        levelIO.Load()
+    local loadedObjects = levelIO.Load()
 
     for _, object in ipairs(loadedObjects) do
         local entity =

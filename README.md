@@ -5,8 +5,9 @@ This started as an attempt to learn how to use CMake and maintaining different b
 ## Build
 
 1. From the project root, go into `buildsystems>MSVC` and open `DV1633GameProject.sln`.
-2. Build the solution, it should compile Lua and raylib. It should also copy the scripts folder to be next to the bin folder.
-4. Should now be possible to run either from the visual studio	
+2. Build the solution, it should compile Lua and raylib. It should also copy the scripts folder to be next to the bin folder
+3. Should now be possible to run either from the visual studio
+4. If raylib or lua is missing, run `git submodule update --init --recursive` to get the submodules
 
 ## Game
 
@@ -14,18 +15,18 @@ The game is an MVP because I did not have time to finish everything I wanted to 
 
 Game runs over 3 rounds.
 
-### Controls:
+### Controls
 
-**Placement**
+**Placement**:
 
 - numbers 1-2 to select an object
 - Left Mouse Button to place object
 - S to save current placement to file
 - L to load object placements from file
 
-To verify that file loading 	works, try placing objects in round 1, quickly die twice, place one more object in round 2, save. Start the `.exe` again and press L to load objects from the file.
+To verify that file loading works, try placing objects in round 1, quickly die twice, place one more object in round 2, save. Start the `.exe` again and press L to load objects from the file.
 
-**Platforming**
+**Platforming**:
 
 - A to move left
 - D to move right

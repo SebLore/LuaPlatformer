@@ -2,15 +2,10 @@
 -- TODO: have it use texture instead of flat colour
 local terrain = {}
 
-function terrain.Create(x, y, width, height, color)
+function terrain.Create(x, y, width, height)
     local entity = scene.CreateEntity()
 
-    scene.SetComponent(
-        entity,
-        "transform",
-        x,
-        y
-    )
+    scene.SetComponent(entity, "transform",x, y)
 
     scene.SetComponent(
         entity,
@@ -22,9 +17,9 @@ function terrain.Create(x, y, width, height, color)
     scene.SetComponent(
         entity,
         "renderable",
-        color[1],
-        color[2],
-        color[3]
+        80,
+        80,
+        80
     )
 
     scene.SetComponent(

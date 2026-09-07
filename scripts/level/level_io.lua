@@ -1,5 +1,6 @@
 -- handle saving and loading of placed objects
 -- this should go with the level editor but for now we just force it into the placement phase
+-- TODO: handle terrain
 local levelIO = {}
 
 local savePath = "TTD_Save.txt"

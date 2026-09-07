@@ -1,23 +1,29 @@
 -- TODO: use terrain.lua
+local terrain = {}
 
-local terrain = require "scripts.level.terrain"
-require "scripts.common"
-
-local level = {}
-
-level.start = {
+terrain.start = {
     x = 200,
     y = 500
 }
 
-function level.Create()
+function terrain.Create()
     -- floor
-    print("creating floor")
-    terrain.Create(100, 600, 1000, 60, colors.grey)
+    local floor = scene.CreateEntity()
+
+    scene.SetComponent(floor, "transform", 100, 600)
+    scene.SetComponent(floor, "collider", 1000, 60)
+    scene.SetComponent(floor, "renderable", 80, 80, 80)
+    scene.SetComponent(floor, "solid")
 
 
     -- platform
-    terrain.Create(550, 450, 250, 30, colors.grey)
+    local platform = scene.CreateEntity()
+
+    scene.SetComponent(platform, "transform", 550, 450)
+    scene.SetComponent(platform, "collider", 250, 30)
+    scene.SetComponent(platform, "renderable", 100, 100, 100)
+    scene.SetComponent(platform, "solid")
+
 
     -- start marker
     local start = scene.CreateEntity()
@@ -25,8 +31,8 @@ function level.Create()
     scene.SetComponent(
         start,
         "transform",
-        level.start.x,
-        level.start.y + 150
+        terrain.start.x,
+        terrain.start.y + 150
     )
 
     scene.SetComponent(
@@ -54,4 +60,4 @@ function level.Create()
     scene.SetComponent(goal, "goal")
 end
 
-return level
+return terrain

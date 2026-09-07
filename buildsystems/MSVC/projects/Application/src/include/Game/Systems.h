@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
-#include <utility>
-#include <vector>
+//#include <memory>
+//#include <utility>
+//#include <vector>
 
 #if defined(_DEBUG)
 #include <iostream>
 #endif
+
 #include "entt/entity/registry.hpp"
 #include <raylib.h>
 
@@ -24,10 +25,8 @@ namespace systems
 
             for (auto entity : view)
             {
-                const auto& transform = view.get<components::Transform>(entity);
-
-                const auto& collider = view.get<components::Collider>(entity);
-
+                const auto& transform  = view.get<components::Transform>(entity);
+                const auto& collider   = view.get<components::Collider>(entity);
                 const auto& renderable = view.get<components::Renderable>(entity);
 
                 DrawRectangle(
@@ -138,7 +137,7 @@ namespace systems
             return false;
         }
 
-        // Create Lua coroutine.
+        // create lua coroutine
         lua_State* thread = lua_newthread(m_L);
 
         // Lua stack:
@@ -295,6 +294,7 @@ namespace systems
         }
     };
 
+    // could possibly be handled in lua
     class PlayerInputSystem : public ISystem
     {
       public:

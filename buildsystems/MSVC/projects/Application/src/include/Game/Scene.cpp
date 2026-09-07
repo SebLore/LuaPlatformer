@@ -81,7 +81,7 @@ void Scene::lua_openscene(lua_State* L, Scene* scene)
 
                                             { nullptr, nullptr } };
 
-    // scene pointer is upvalue #1
+    // scene pointer is upvalue #1 on the stack
     lua_pushlightuserdata(L, scene);
     luaL_setfuncs(L, methods, 1);
 

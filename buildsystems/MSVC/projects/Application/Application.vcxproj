@@ -22,6 +22,19 @@
     <ClInclude Include="src\include\Game\Systems\DrawSystem.h" />
     <ClInclude Include="src\include\Game\Systems.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\scripts\behaviours\moving_platform.lua" />
+    <None Include="..\..\..\..\scripts\common.lua" />
+    <None Include="..\..\..\..\scripts\controllers\game_controller.lua" />
+    <None Include="..\..\..\..\scripts\controllers\player_controller.lua" />
+    <None Include="..\..\..\..\scripts\game.lua" />
+    <None Include="..\..\..\..\scripts\level\level.lua" />
+    <None Include="..\..\..\..\scripts\level\level_io.lua" />
+    <None Include="..\..\..\..\scripts\level\objects.lua" />
+    <None Include="..\..\..\..\scripts\level\terrain.lua" />
+    <None Include="..\..\..\..\scripts\player.lua" />
+    <None Include="..\..\..\..\scripts\ui.lua" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

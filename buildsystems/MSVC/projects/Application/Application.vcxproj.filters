@@ -9,9 +9,17 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{e7e19e4a-164a-4bca-917c-bbb30c22ad33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts\behaviours">
+      <UniqueIdentifier>{b54a7847-ad25-4d8d-a5fe-0774a9f3b128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts\controllers">
+      <UniqueIdentifier>{71504ac2-59ed-4fb2-aad9-f89ac3ce8a09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts\level">
+      <UniqueIdentifier>{bd8dffff-568f-4bdb-97e4-ce737ebc6477}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +49,40 @@
     <ClInclude Include="src\include\Game\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\scripts\common.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\game.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\player.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\ui.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\behaviours\moving_platform.lua">
+      <Filter>scripts\behaviours</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\controllers\game_controller.lua">
+      <Filter>scripts\controllers</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\controllers\player_controller.lua">
+      <Filter>scripts\controllers</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\level\level.lua">
+      <Filter>scripts\level</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\level\level_io.lua">
+      <Filter>scripts\level</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\level\objects.lua">
+      <Filter>scripts\level</Filter>
+    </None>
+    <None Include="..\..\..\..\scripts\level\terrain.lua">
+      <Filter>scripts\level</Filter>
+    </None>
   </ItemGroup>
 </Project>
