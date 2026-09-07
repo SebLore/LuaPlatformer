@@ -52,3 +52,5 @@
 # Own excludes
 build/
 bin/
+external/raylib
+external/raygui
